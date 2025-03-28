@@ -24,7 +24,7 @@ const AppNavbar = () => {
   const theme = useTheme();
   return (
     <>
-      <div className="md:hidden  w-full fixed bottom-0 z-10 ">
+      <div className="md:hidden  w-full fixed bottom-0 z-10 bg-red-500">
         <nav className="bg-slate-100 dark:bg-slate-700 py-5 flex justify-between px-4 items-center ">
           <div className="flex items-center space-x-2">
             <Popover>
@@ -33,7 +33,7 @@ const AppNavbar = () => {
                   <AvatarImage
                     height={50}
                     width={50}
-                    src="https://github.com/DhrishP.png  "
+                    src="https://github.com/sujal12344.png  "
                     alt="@shadcn"
                   />
                   <AvatarFallback>PFP</AvatarFallback>
@@ -41,7 +41,7 @@ const AppNavbar = () => {
                 <PopoverContent className="w-[35vw]">
                   <ul>
                     <Link
-                      href="https://github.com/DhrishP"
+                      href="https://github.com/Sujal12344"
                       className="flex items-center hover:bg-primary-foreground space-x-2 border-muted border rounded px-1 mb-2 cursor-pointer py-2   "
                     >
                       <GithubIcon className="h-4 w-4" />
@@ -67,22 +67,22 @@ const AppNavbar = () => {
             </Popover>
             <div className="flex items-center animate-pulse">
               <div>
-              <Image
-                src="/images/arrow.png"
-                className="  -rotate-90 -scale-y-100"
-                alt="PFP"
-                width={25}
-                height={5}
+                <Image
+                  src="/images/arrow.png"
+                  className="  -rotate-90 -scale-y-100"
+                  alt="PFP"
+                  width={25}
+                  height={5}
                 />
-              <Image
-                src="/images/arrow.png"
-                className="  rotate-90"
-                alt="PFP"
-                width={25}
-                height={5}
+                <Image
+                  src="/images/arrow.png"
+                  className="  rotate-90"
+                  alt="PFP"
+                  width={25}
+                  height={5}
                 />
-                </div>
-                <h2 className="text-xs">Links</h2>
+              </div>
+              <h2 className="text-xs">Links</h2>
             </div>
           </div>
           <div>
@@ -128,7 +128,7 @@ const AppNavbar = () => {
                           onClick={() => theme.setTheme("light")}
                           className="p-5 rounded-md bg-secondary border flex space-x-2 items-center w-full  "
                         >
-                          <Sun  className="h-5 w-5 text-primary hover:text-secondary " />
+                          <Sun className="h-5 w-5 text-primary hover:text-secondary " />
                           <h3 className="text-primary hover:text-secondary">
                             Light
                           </h3>

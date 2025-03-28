@@ -8,7 +8,7 @@ type CardProps = {
   title: string;
   description: string;
   image: string;
-  color:string,
+  color: string;
   githubURL: string;
   websiteURL: string;
 };
@@ -18,7 +18,7 @@ export default function Card({
   githubURL,
   image,
   websiteURL,
-  color
+  color,
 }: CardProps) {
   const cardVariants = {
     offscreen: {
@@ -51,7 +51,12 @@ export default function Card({
         >
           <div className="grid grid-rows-2 md:grid-cols-4 gap-1 md:gap-5 lg:gap-8 ">
             <div className="md:col-span-2  h-full w-full p-6 ">
-              <motion.div initial={{scale:1}} whileHover={{scale:1.7,y:2}} whileTap={{scale:1.7,y:2}} className="flex items-center border ">
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.7, y: 2 }}
+                whileTap={{ scale: 1.7, y: 2 }}
+                className="flex items-center border "
+              >
                 <Image
                   height={700}
                   width={500}
@@ -62,7 +67,12 @@ export default function Card({
               </motion.div>
             </div>
             <div className=" md:col-span-2 px-2 md:px-0 md:h-full w-full">
-              <h2 style={{color:color}}  className={cn("md:text-2xl capitalize text-lg ")}>{title}</h2>
+              <h2
+                style={{ color: color }}
+                className={cn("md:text-2xl capitalize text-lg ")}
+              >
+                {title}
+              </h2>
               <p className="text-gray-400 text-xs md:text-[1rem] mt-2 mb-4 ">
                 {description}
               </p>
@@ -86,7 +96,7 @@ export default function Card({
           </div>
         </motion.div>
       </motion.div>
-      <div className="border-b-2 border-gray-600 w-1/2 mx-auto md:translate-y-12 translate-y-14 "></div>
+      <div className="border-b-2 border-gray-600 w-1/2 mx-auto md:translate-y-12 translate-y-14 " />
     </>
   );
 }
