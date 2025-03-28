@@ -21,36 +21,38 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { Code } from "lucide-react";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
-  const [isScrolled, setIsScrolled] = useState(false);
+  // const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setTheme, theme } = useTheme();
 
   // Track scroll position for navbar styling and active section
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setIsScrolled(window.scrollY > 20);
 
-      // Determine active section based on scroll position
-      const sections = ["home", "about", "skills", "projects", "contact"];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
+  //     // Determine active section based on scroll position
+  //     const sections = ["home", "about", "skills", "projects", "contact"];
+  //     for (const section of sections) {
+  //       const element = document.getElementById(section);
+  //       if (element) {
+  //         const rect = element.getBoundingClientRect();
+  //         if (rect.top <= 200 && rect.bottom >= 200) {
+  //           setActiveSection(section);
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -64,20 +66,28 @@ const Navbar = () => {
     <>
       {/* Desktop Navigation */}
       <nav
-        className={`sm:flex hidden w-full md:fixed py-4 justify-between items-center z-10 transition-all duration-300 ${
-          isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : ""
+        className={`sm:flex hidden w-full md:fixed py-4 px-6 justify-between items-center z-10 transition-all duration-500 ${
+          // isScrolled
+          // ?
+          "bg-background/90 backdrop-blur-md shadow-md border-b border-primary/10"
+          // : ""
         }`}
       >
         <div className="w-1/3 flex-col flex items-center">
-          <div className="flex space-x-3 items-center justify-center">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex space-x-3 items-center justify-center"
+          >
             <DropdownMenu>
-              <Avatar className="ring-2 ring-primary/20 transition-all hover:ring-primary/70">
+              <Avatar className="ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md">
                 <DropdownMenuTrigger>
                   <AvatarImage
-                    src="https://github.com/DhrishP.png"
+                    src="https://github.com/Sujal12344.png"
                     alt="Profile"
                   />
-                  <AvatarFallback>SK</AvatarFallback>
+                  <AvatarFallback>
+                    <span className="text-xs">Sujal</span>
+                  </AvatarFallback>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuLabel>Connect with me</DropdownMenuLabel>
@@ -86,7 +96,7 @@ const Navbar = () => {
                     <a
                       className="flex items-center w-full"
                       target="_blank"
-                      href="https://github.com/DhrishP"
+                      href="https://github.com/Sujal12344"
                       rel="noopener noreferrer"
                     >
                       <Github className="mr-2 h-4 w-4" />
@@ -108,7 +118,7 @@ const Navbar = () => {
                     <a
                       className="flex items-center w-full"
                       target="_blank"
-                      href="https://www.linkedin.com/in/dhrish-parekh-89a845262/"
+                      href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
                       rel="noopener noreferrer"
                     >
                       <LinkedinIcon className="mr-2 h-4 w-4" />
@@ -128,26 +138,69 @@ const Navbar = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </Avatar>
-              <h3 className="text-sm font-medium ml-2">Sujal Kesharwani</h3>
+              <motion.h3
+                className="font-medium ml-2 flex items-center gap-1"
+                whileHover={{ color: "hsl(var(--primary))" }}
+              >
+                {/* <Code className="h-4 w-4 text-primary" /> */}
+                Sujal Kesharwani
+              </motion.h3>
             </DropdownMenu>
-          </div>
+          </motion.div>
         </div>
 
         <ul className="w-1/2 flex cursor-pointer mr-2 md:mr-2 items-center space-x-6 justify-center">
           {navLinks.map((link) => (
-            <li
+            <motion.li
               key={link.name}
-              className={`relative px-2 py-1 hover:text-primary transition-colors ${
+              initial={{ opacity: 0.8 }}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.95 }}
+              className={`relative px-3 py-2 rounded-md transition-all duration-300 ${
                 activeSection === link.href.substring(1)
-                  ? "text-primary font-medium"
-                  : ""
+                  ? "text-primary font-medium bg-primary/5"
+                  : "hover:bg-secondary/80"
               }`}
             >
-              <a href={link.href}>{link.name}</a>
+              <a
+                href={link.href}
+                onClick={(e) => {
+                  // Add smooth scrolling with a slight delay for better UX
+                  e.preventDefault();
+                  const href = link.href;
+                  const targetId = href.replace("#", "");
+                  const element = document.getElementById(targetId);
+
+                  // Highlight clicked item immediately for better feedback
+                  setActiveSection(targetId);
+
+                  // Close mobile menu if open
+                  if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+
+                  // Smooth scroll with slight delay for better UX
+                  setTimeout(() => {
+                    element?.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+                className="flex items-center justify-center space-x-1"
+              >
+                <span>{link.name}</span>
+              </a>
+
+              {/* Enhanced active indicator with animation */}
               {activeSection === link.href.substring(1) && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full"></span>
+                <motion.div
+                  layoutId="activeSection"
+                  className="absolute bottom-0 left-0 right-0 mx-auto w-full h-0.5 bg-primary"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
               )}
-            </li>
+            </motion.li>
           ))}
           <li>
             <DropdownMenu>
@@ -177,15 +230,19 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <nav
         className={`sm:hidden fixed top-0 left-0 right-0 z-50 p-4 ${
-          isScrolled
-            ? "bg-background/90 backdrop-blur-md shadow-sm"
-            : "bg-background/50"
+          // isScrolled
+          // ?
+          "bg-background/90 backdrop-blur-md shadow-sm"
+          // : "bg-background/50"
         }`}
       >
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="https://github.com/DhrishP.png" alt="Profile" />
+              <AvatarImage
+                src="https://github.com/Sujal12344.png"
+                alt="Profile"
+              />
               <AvatarFallback>SK</AvatarFallback>
             </Avatar>
             <span className="font-medium">Sujal Kesharwani</span>
@@ -200,74 +257,84 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-background shadow-lg border-t dark:border-gray-800 rounded-b-lg overflow-hidden">
-            <ul className="py-2">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className={`block px-6 py-3 ${
-                      activeSection === link.href.substring(1)
-                        ? "text-primary font-medium"
-                        : ""
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg shadow-lg border-t dark:border-gray-800 rounded-b-lg overflow-hidden"
+            >
+              <ul className="py-2">
+                {navLinks.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className={`block px-6 py-3 ${
+                        activeSection === link.href.substring(1)
+                          ? "text-primary font-medium"
+                          : ""
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+                <li className="px-6 py-3 flex items-center justify-between">
+                  <span>Theme</span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                    aria-label="Toggle theme"
                   >
-                    {link.name}
-                  </a>
+                    {theme === "dark" ? <Sun /> : <Moon />}
+                  </Button>
                 </li>
-              ))}
-              <li className="px-6 py-3 flex items-center justify-between">
-                <span>Theme</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  aria-label="Toggle theme"
-                >
-                  {theme === "dark" ? <Sun /> : <Moon />}
-                </Button>
-              </li>
-              <li className="px-6 py-3 border-t dark:border-gray-800">
-                <div className="flex space-x-4 justify-center mt-2">
-                  <a
-                    href="https://github.com/DhrishP"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                  >
-                    <Github className="h-5 w-5" />
-                  </a>
-                  <a
-                    href="https://twitter.com/whycurious101"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Twitter"
-                  >
-                    <Twitter className="h-5 w-5" />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/dhrish-parekh-89a845262/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                  >
-                    <LinkedinIcon className="h-5 w-5" />
-                  </a>
-                  <a
-                    href="https://dhrishp.tiiny.site"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Resume"
-                  >
-                    <File className="h-5 w-5" />
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        )}
+                <li className="px-6 py-3 border-t dark:border-gray-800">
+                  <div className="flex space-x-4 justify-center mt-2">
+                    <a
+                      href="https://github.com/Sujal12344"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub"
+                    >
+                      <Github className="h-5 w-5" />
+                    </a>
+                    <a
+                      href="https://twitter.com/whycurious101"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Twitter"
+                    >
+                      <Twitter className="h-5 w-5" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                    >
+                      <LinkedinIcon className="h-5 w-5" />
+                    </a>
+                    <a
+                      href="https://dhrishp.tiiny.site"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Resume"
+                    >
+                      <File className="h-5 w-5" />
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </>
   );
