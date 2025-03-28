@@ -27,37 +27,38 @@ import { Code } from "lucide-react";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
-  // const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setTheme, theme } = useTheme();
 
   // Track scroll position for navbar styling and active section
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsScrolled(window.scrollY > 20);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
 
-  //     // Determine active section based on scroll position
-  //     const sections = ["home", "about", "skills", "projects", "contact"];
-  //     for (const section of sections) {
-  //       const element = document.getElementById(section);
-  //       if (element) {
-  //         const rect = element.getBoundingClientRect();
-  //         if (rect.top <= 200 && rect.bottom >= 200) {
-  //           setActiveSection(section);
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   };
+      // Determine active section based on scroll position
+      const sections = ["home", "about", "skills", "projects", "contact"];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom >= 200) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
 
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
@@ -67,10 +68,9 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <nav
         className={`sm:flex hidden w-full md:fixed py-4 px-6 justify-between items-center z-10 transition-all duration-500 ${
-          // isScrolled
-          // ?
-          "bg-background/90 backdrop-blur-md shadow-md border-b border-primary/10"
-          // : ""
+          isScrolled
+            ? "bg-background/90 backdrop-blur-md shadow-md border-b border-primary/10"
+            : ""
         }`}
       >
         <div className="w-1/3 flex-col flex items-center">
@@ -230,10 +230,9 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <nav
         className={`sm:hidden fixed top-0 left-0 right-0 z-50 p-4 ${
-          // isScrolled
-          // ?
-          "bg-background/90 backdrop-blur-md shadow-sm"
-          // : "bg-background/50"
+          isScrolled
+            ? "bg-background/90 backdrop-blur-md shadow-sm"
+            : "bg-background/50"
         }`}
       >
         <div className="flex justify-between items-center">
