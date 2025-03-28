@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   GithubIcon,
@@ -24,6 +24,13 @@ const Contact = () => {
     name: "",
     message: "",
   });
+  // Add state for current URL
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  // Set the URL after component mounts (client-side only)
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -310,11 +317,8 @@ const Contact = () => {
                 >
                   {/* Hidden input for FormSubmit.co */}
                   <input type="hidden" name="_captcha" value="false" />
-                  <input
-                    type="hidden"
-                    name="_next"
-                    value={window.location.href}
-                  />
+                  {/* Use the state variable instead of directly accessing window */}
+                  <input type="hidden" name="_next" value={currentUrl} />
                   <input
                     type="hidden"
                     name="_subject"
