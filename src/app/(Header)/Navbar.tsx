@@ -37,22 +37,59 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 20);
 
       // Determine active section based on scroll position
-      const sections = ["home", "about", "skills", "projects", "contact"];
+      const sections = [
+        "home",
+        "about",
+        "skills",
+        "experience",
+        "projects",
+        "contact",
+      ];
+
+      // Find the section that is currently in view
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
-            setActiveSection(section);
+          // Consider a section to be active when its top is near the top of the viewport (accounting for navbar)
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            if (activeSection !== section) {
+              setActiveSection(section);
+            }
             break;
           }
         }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    // Initialize on first render
+    setTimeout(handleScroll, 100);
+
+    // Add event listener
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Clean up event listener on component unmount
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [activeSection]);
+
+  // Scroll to section with offset for fixed navbar
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (!element) return;
+
+    // Get the navbar height to use as offset
+    const navbarHeight = 80; // Approximate height of your navbar in pixels
+
+    // Calculate the position to scroll to
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+    // Smooth scroll to the element
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  };
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -67,10 +104,10 @@ const Navbar = () => {
     <>
       {/* Desktop Navigation */}
       <nav
-        className={`sm:flex hidden w-full md:fixed py-4 px-6 justify-between items-center z-10 transition-all duration-500 ${
+        className={`sm:flex hidden w-full md:fixed py-4 px-6 justify-between items-center z-50 transition-all duration-500 ${
           isScrolled
             ? "bg-background/90 backdrop-blur-md shadow-md border-b border-primary/10"
-            : ""
+            : "bg-background/50 backdrop-blur-sm"
         }`}
       >
         <div className="w-1/3 flex-col flex items-center">
@@ -78,9 +115,10 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="flex space-x-3 items-center justify-center"
           >
+            {/* Fix: Properly structure the DropdownMenu with separate Trigger component */}
             <DropdownMenu>
-              <Avatar className="ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md">
-                <DropdownMenuTrigger>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md cursor-pointer">
                   <AvatarImage
                     src="https://github.com/Sujal12344.png"
                     alt="Profile"
@@ -88,64 +126,63 @@ const Navbar = () => {
                   <AvatarFallback>
                     <span className="text-xs">Sujal</span>
                   </AvatarFallback>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Connect with me</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                    <a
-                      className="flex items-center w-full"
-                      target="_blank"
-                      href="https://github.com/Sujal12344"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="mr-2 h-4 w-4" />
-                      <span>GitHub</span>
-                    </a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                    <a
-                      className="flex items-center w-full"
-                      target="_blank"
-                      href="https://twitter.com/whycurious101"
-                      rel="noopener noreferrer"
-                    >
-                      <Twitter className="mr-2 h-4 w-4" />
-                      <span>Twitter</span>
-                    </a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                    <a
-                      className="flex items-center w-full"
-                      target="_blank"
-                      href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
-                      rel="noopener noreferrer"
-                    >
-                      <LinkedinIcon className="mr-2 h-4 w-4" />
-                      <span>LinkedIn</span>
-                    </a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                    <a
-                      className="flex items-center w-full"
-                      target="_blank"
-                      href="https://dhrishp.tiiny.site"
-                      rel="noopener noreferrer"
-                    >
-                      <File className="mr-2 h-4 w-4" />
-                      <span>Resume</span>
-                    </a>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </Avatar>
-              <motion.h3
-                className="font-medium ml-2 flex items-center gap-1"
-                whileHover={{ color: "hsl(var(--primary))" }}
-              >
-                {/* <Code className="h-4 w-4 text-primary" /> */}
-                Sujal Kesharwani
-              </motion.h3>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center">
+                <DropdownMenuLabel>Connect with me</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
+                  <a
+                    className="flex items-center w-full"
+                    target="_blank"
+                    href="https://github.com/Sujal12344"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="mr-2 h-4 w-4" />
+                    <span>GitHub</span>
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
+                  <a
+                    className="flex items-center w-full"
+                    target="_blank"
+                    href="https://twitter.com/whycurious101"
+                    rel="noopener noreferrer"
+                  >
+                    <Twitter className="mr-2 h-4 w-4" />
+                    <span>Twitter</span>
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
+                  <a
+                    className="flex items-center w-full"
+                    target="_blank"
+                    href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
+                    rel="noopener noreferrer"
+                  >
+                    <LinkedinIcon className="mr-2 h-4 w-4" />
+                    <span>LinkedIn</span>
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
+                  <a
+                    className="flex items-center w-full"
+                    target="_blank"
+                    href="https://dhrishp.tiiny.site"
+                    rel="noopener noreferrer"
+                  >
+                    <File className="mr-2 h-4 w-4" />
+                    <span>Resume</span>
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
             </DropdownMenu>
+            <motion.h3
+              className="font-medium ml-2 flex items-center gap-1"
+              whileHover={{ color: "hsl(var(--primary))" }}
+            >
+              Sujal Kesharwani
+            </motion.h3>
           </motion.div>
         </div>
 
