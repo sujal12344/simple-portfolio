@@ -165,11 +165,7 @@ const ExperienceCard = ({
     >
       {/* Date indicator */}
       <motion.div
-        className={`hidden md:flex absolute top-0 ${
-          isEven
-            ? "left-0 -translate-x-full pl-8"
-            : "right-0 translate-x-full pr-8"
-        } items-center space-x-2 text-muted-foreground`}
+        className={`hidden md:flex absolute top-6 right-0 translate-x-full pr-8 items-center space-x-2 text-muted-foreground`}
         initial={{ opacity: 0, x: isEven ? 20 : -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
@@ -343,7 +339,7 @@ const Experience = () => {
             whileInView={{ y: 0 }}
             transition={{ duration: 0.7, type: "spring" }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-5xl font-bold text-center mb-4 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 tracking-tight"
           >
             My Professional Journey
           </motion.h1>

@@ -115,7 +115,7 @@ const Project = () => {
             whileInView={{ y: 0 }}
             transition={{ duration: 0.7, type: "spring" }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-4 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 tracking-tight"
           >
             Problems and Paradigms
           </motion.h1>

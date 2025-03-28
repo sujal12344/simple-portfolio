@@ -24,7 +24,7 @@ const AppNavbar = () => {
   const theme = useTheme();
   return (
     <>
-      <div className="md:hidden  w-full fixed bottom-0 z-10 bg-red-500">
+      <div className="md:hidden  w-full fixed bottom-0 z-10">
         <nav className="bg-slate-100 dark:bg-slate-700 py-5 flex justify-between px-4 items-center ">
           <div className="flex items-center space-x-2">
             <Popover>

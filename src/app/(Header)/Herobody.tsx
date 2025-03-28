@@ -68,8 +68,9 @@ const Herobody = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-lg text-muted-foreground max-w-md leading-relaxed"
           >
-            Turning vision into reality with coding and designing using awesome
-            technologies. I also write to document my life journey.
+            Hi, I'm Sujal Kesharwani, a full stack developer with experience in
+            building scalable web apps using modern industry technologies. I'm
+            always curious and excite to explore new things.
           </motion.p>
 
           <motion.div

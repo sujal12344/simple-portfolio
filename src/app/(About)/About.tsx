@@ -53,7 +53,7 @@ const About = () => {
             whileInView={{ y: 0 }}
             transition={{ duration: 0.7, type: "spring" }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 tracking-tight"
           >
             PASSION FUELS PURPOSE.
           </motion.h1>
