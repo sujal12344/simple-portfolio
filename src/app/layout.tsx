@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   title: "Sujal's Portfolio",
   icons: {
     icon: "/images/childish.png",
+    shortcut: "/images/childish.png",
+    apple: "/images/childish.png",
   },
   description: "Portfolio of Sujal, A full stack developer and a curious mind",
 };
