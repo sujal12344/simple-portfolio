@@ -1,13 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  LeafyGreen,
-  MoveDown,
-  ArrowDown,
-  Code,
-  ArrowRight,
-} from "lucide-react";
+import { LeafyGreen, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -141,7 +135,7 @@ const Herobody = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur-md opacity-75 animate-pulse" />
             <div className="relative">
               <Image
-                src="https://github.com/sujal12344.png"
+                src="/images/Sujal.jpg"
                 className="rounded-full object-cover border-4 border-background shadow-2xl"
                 alt="Profile picture of Sujal Kesharwani"
                 width={340}
