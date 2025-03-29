@@ -7,7 +7,9 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 export const metadata: Metadata = {
   title: "Sujal's Portfolio",
-  icons: "childish.png",
+  icons: {
+    icon: "/images/childish.png",
+  },
   description: "Portfolio of Sujal, A full stack developer and a curious mind",
 };
 

@@ -229,7 +229,7 @@ const Skill = () => {
               height: activeCategory === "all" ? "45vw" : "35vw",
               backgroundColor:
                 activeCategory === "all"
-                  ? "rgba(var(--secondary-rgb), 0.3)"
+                  ? "rgba(176, 190, 197, 0.3)" // Replace with a direct color value
                   : activeCategory === "frontend"
                   ? "rgba(59, 130, 246, 0.1)"
                   : activeCategory === "backend"
