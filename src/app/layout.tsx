@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import "./global.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
@@ -23,7 +22,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {children}
+          {children}
         </ThemeProvider>
       </body>
     </html>

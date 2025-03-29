@@ -9,7 +9,7 @@ import Experience from "./(Experience)/Experience";
 export default function Home() {
   return (
     <>
-      <div className="h-screen w-full bg-primary-foreground">
+      <div className="min-h-screen w-full bg-primary-foreground">
         <Navbar />
         <Herobody />
       </div>
