@@ -95,24 +95,27 @@ const Contact = () => {
   };
 
   return (
-    <div className="relative py-20 overflow-hidden bg-background" id="contact">
-      {/* Background elements */}
-      <div className="absolute top-20 left-0 opacity-5 text-6xl font-mono">
+    <div
+      className="relative py-12 sm:py-16 md:py-20 overflow-hidden bg-background"
+      id="contact"
+    >
+      {/* Background elements - Adjusted for better mobile display */}
+      <div className="absolute top-10 sm:top-20 left-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
         {"<contact>"}
       </div>
-      <div className="absolute bottom-20 right-0 opacity-5 text-6xl font-mono">
+      <div className="absolute bottom-10 sm:bottom-20 right-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
         {"</contact>"}
       </div>
       <div className="absolute inset-0 bg-grid-small-white/[0.025] -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
+        {/* Section header - Made more responsive */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12 flex flex-col items-center"
+          className="mb-8 sm:mb-10 md:mb-12 flex flex-col items-center"
         >
           <div className="flex items-center gap-2 mb-3">
             <div className="h-px w-5 bg-primary" />
@@ -121,7 +124,7 @@ const Contact = () => {
                 scale: 1.05,
                 backgroundColor: "hsl(var(--primary)/0.15)",
               }}
-              className="text-primary font-mono text-sm px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
+              className="text-primary font-mono text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
             >
               05. <span className="text-foreground">Get In Touch</span>
             </motion.span>
@@ -133,7 +136,7 @@ const Contact = () => {
             whileInView={{ y: 0 }}
             transition={{ duration: 0.7, type: "spring" }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 tracking-tight"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-3 sm:mb-4 tracking-tight px-2"
           >
             Let&apos;s Build Something Amazing Together
           </motion.h1>
@@ -143,48 +146,53 @@ const Contact = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-muted-foreground text-center max-w-2xl mx-auto text-lg"
+            className="text-muted-foreground text-center max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-2"
           >
             Have a project in mind or just want to connect? Reach out and let's
             start a conversation.
           </motion.p>
         </motion.div>
 
-        <div className="container mx-auto max-w-5xl">
+        <div className="container mx-auto max-w-5xl px-0">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-card/50 backdrop-blur-sm rounded-xl shadow-lg border border-primary/10 p-6 md:p-10 mb-20"
+            className="bg-card/50 backdrop-blur-sm rounded-xl shadow-lg border border-primary/10 p-4 sm:p-6 md:p-8 lg:p-10 mb-10 sm:mb-16 md:mb-20"
           >
-            <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-              {/* Left column - Contact info */}
-              <motion.div variants={itemVariants} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-16">
+              {/* Left column - Contact info - Made mobile friendly */}
+              <motion.div
+                variants={itemVariants}
+                className="space-y-6 sm:space-y-8"
+              >
                 <div>
-                  <h2 className="text-2xl font-bold mb-4 relative inline-block">
+                  <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 relative inline-block">
                     <span className="relative z-10">Get in Touch</span>
                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/50 -z-10 skew-x-3" />
                   </h2>
-                  <p className="text-muted-foreground mb-6">
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
                     I'm always open to discussing new projects, creative ideas,
                     or opportunities to be part of your vision.
                   </p>
                 </div>
 
-                <div className="space-y-5">
+                <div className="space-y-3 sm:space-y-5">
                   <motion.a
                     href="mailto:sujalkesharwani220@gmail.com"
-                    className="flex items-center gap-4 group cursor-pointer p-3 rounded-lg hover:bg-primary/5 transition-colors"
+                    className="flex items-center gap-3 sm:gap-4 group cursor-pointer p-2 sm:p-3 rounded-lg hover:bg-primary/5 transition-colors"
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    <div className="p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                      <Mail className="h-5 w-5" />
+                    <div className="p-2 sm:p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                      <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Email Me</h3>
-                      <p className="text-sm text-muted-foreground group-hover:text-primary/80 transition-colors">
+                      <h3 className="font-medium text-sm sm:text-base">
+                        Email Me
+                      </h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground group-hover:text-primary/80 transition-colors break-all">
                         sujalkesharwani220@gmail.com
                       </p>
                     </div>
@@ -194,16 +202,18 @@ const Contact = () => {
                     href="https://cal.com/whycurious101"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 group cursor-pointer p-3 rounded-lg hover:bg-primary/5 transition-colors"
+                    className="flex items-center gap-3 sm:gap-4 group cursor-pointer p-2 sm:p-3 rounded-lg hover:bg-primary/5 transition-colors"
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    <div className="p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                      <Calendar className="h-5 w-5" />
+                    <div className="p-2 sm:p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                      <Calendar className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Schedule a Meeting</h3>
-                      <p className="text-sm text-muted-foreground group-hover:text-primary/80 transition-colors">
+                      <h3 className="font-medium text-sm sm:text-base">
+                        Schedule a Meeting
+                      </h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground group-hover:text-primary/80 transition-colors">
                         Find a time on my calendar
                       </p>
                     </div>
@@ -211,8 +221,10 @@ const Contact = () => {
                 </div>
 
                 <div className="pt-4 border-t border-border/40">
-                  <h3 className="text-lg font-medium mb-4">Connect with Me</h3>
-                  <div className="flex gap-3">
+                  <h3 className="text-base sm:text-lg font-medium mb-3 sm:mb-4">
+                    Connect with Me
+                  </h3>
+                  <div className="flex gap-2 sm:gap-3">
                     <motion.div
                       whileHover={{ y: -5 }}
                       whileTap={{ scale: 0.95 }}
@@ -221,7 +233,7 @@ const Contact = () => {
                         asChild
                         variant="outline"
                         size="icon"
-                        className="rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
+                        className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
                           href="https://github.com/sujal12344"
@@ -229,7 +241,7 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           aria-label="GitHub"
                         >
-                          <GithubIcon className="h-5 w-5" />
+                          <GithubIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </a>
                       </Button>
                     </motion.div>
@@ -242,7 +254,7 @@ const Contact = () => {
                         asChild
                         variant="outline"
                         size="icon"
-                        className="rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
+                        className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
                           href="https://twitter.com/whycurious101"
@@ -250,7 +262,7 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           aria-label="Twitter"
                         >
-                          <TwitterIcon className="h-5 w-5" />
+                          <TwitterIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </a>
                       </Button>
                     </motion.div>
@@ -263,7 +275,7 @@ const Contact = () => {
                         asChild
                         variant="outline"
                         size="icon"
-                        className="rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
+                        className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
                           href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
@@ -271,7 +283,7 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           aria-label="LinkedIn"
                         >
-                          <LinkedinIcon className="h-5 w-5" />
+                          <LinkedinIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </a>
                       </Button>
                     </motion.div>
@@ -284,7 +296,7 @@ const Contact = () => {
                         asChild
                         variant="outline"
                         size="icon"
-                        className="rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
+                        className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
                           href="https://dhrishp.tiiny.site"
@@ -292,7 +304,7 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           aria-label="Resume"
                         >
-                          <File className="h-5 w-5" />
+                          <File className="h-4 w-4 sm:h-5 sm:w-5" />
                         </a>
                       </Button>
                     </motion.div>
@@ -300,10 +312,10 @@ const Contact = () => {
                 </div>
               </motion.div>
 
-              {/* Right column - Contact form */}
+              {/* Right column - Contact form - Made touch-friendly */}
               <motion.div variants={itemVariants}>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold relative inline-block">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <h2 className="text-xl sm:text-2xl font-bold relative inline-block">
                     <span className="relative z-10">Send a Message</span>
                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/50 -z-10 skew-x-3" />
                   </h2>
@@ -313,7 +325,7 @@ const Contact = () => {
                   id="contact-form"
                   method="POST"
                   onSubmit={handleSubmit}
-                  className="space-y-6"
+                  className="space-y-4 sm:space-y-6"
                 >
                   {/* Hidden input for FormSubmit.co */}
                   <input type="hidden" name="_captcha" value="false" />
@@ -325,7 +337,7 @@ const Contact = () => {
                     value="New contact from portfolio"
                   />
 
-                  {/* Input fields with animated labels */}
+                  {/* Input fields with animated labels - Improved for touch devices */}
                   <motion.div variants={itemVariants} className="group">
                     <div className="relative border border-primary/20 rounded-lg focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/30 transition-all duration-200 overflow-hidden">
                       <input
@@ -334,13 +346,13 @@ const Contact = () => {
                         id="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="block w-full px-4 pt-6 pb-2 text-base bg-transparent appearance-none focus:outline-none peer"
+                        className="block w-full px-3 sm:px-4 pt-6 pb-2 text-sm sm:text-base bg-transparent appearance-none focus:outline-none peer"
                         placeholder=" "
                         required
                       />
                       <label
                         htmlFor="email"
-                        className="absolute top-2 left-4 text-xs text-muted-foreground peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base transition-all duration-200 peer-focus:top-2 peer-focus:text-xs"
+                        className="absolute top-2 left-3 sm:left-4 text-xs text-muted-foreground peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm sm:peer-placeholder-shown:text-base transition-all duration-200 peer-focus:top-2 peer-focus:text-xs"
                       >
                         Email Address
                       </label>
@@ -356,13 +368,13 @@ const Contact = () => {
                         id="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="block w-full px-4 pt-6 pb-2 text-base bg-transparent appearance-none focus:outline-none peer"
+                        className="block w-full px-3 sm:px-4 pt-6 pb-2 text-sm sm:text-base bg-transparent appearance-none focus:outline-none peer"
                         placeholder=" "
                         required
                       />
                       <label
                         htmlFor="name"
-                        className="absolute top-2 left-4 text-xs text-muted-foreground peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base transition-all duration-200 peer-focus:top-2 peer-focus:text-xs"
+                        className="absolute top-2 left-3 sm:left-4 text-xs text-muted-foreground peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm sm:peer-placeholder-shown:text-base transition-all duration-200 peer-focus:top-2 peer-focus:text-xs"
                       >
                         Your Name
                       </label>
@@ -378,13 +390,13 @@ const Contact = () => {
                         rows={4}
                         value={formData.message}
                         onChange={handleInputChange}
-                        className="block w-full px-4 pt-6 pb-2 text-base bg-transparent appearance-none focus:outline-none resize-none peer"
+                        className="block w-full px-3 sm:px-4 pt-6 pb-2 text-sm sm:text-base bg-transparent appearance-none focus:outline-none resize-none peer"
                         placeholder=" "
                         required
                       />
                       <label
                         htmlFor="message"
-                        className="absolute top-2 left-4 text-xs text-muted-foreground peer-placeholder-shown:top-4 peer-placeholder-shown:text-base transition-all duration-200 peer-focus:top-2 peer-focus:text-xs"
+                        className="absolute top-2 left-3 sm:left-4 text-xs text-muted-foreground peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm sm:peer-placeholder-shown:text-base transition-all duration-200 peer-focus:top-2 peer-focus:text-xs"
                       >
                         Your Message
                       </label>
@@ -397,9 +409,9 @@ const Contact = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-3 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-300 flex items-center gap-2"
+                      className="p-2 sm:p-3 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-300 flex items-center gap-2 text-xs sm:text-sm"
                     >
-                      <CheckCircle className="h-5 w-5" />
+                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                       <span>
                         Message sent successfully! I'll get back to you soon.
                       </span>
@@ -410,9 +422,9 @@ const Contact = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-3 bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-300 flex items-center gap-2"
+                      className="p-2 sm:p-3 bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-300 flex items-center gap-2 text-xs sm:text-sm"
                     >
-                      <AlertCircle className="h-5 w-5" />
+                      <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                       <span>
                         There was an error sending your message. Please try
                         again.
@@ -420,24 +432,24 @@ const Contact = () => {
                     </motion.div>
                   )}
 
-                  {/* Submit button */}
+                  {/* Submit button - Improved for touch */}
                   <motion.div variants={itemVariants}>
                     <Button
-                      className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-6 rounded-lg transition-all duration-300 group overflow-hidden relative"
+                      className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-5 sm:py-6 rounded-lg transition-all duration-300 group overflow-hidden relative"
                       type="submit"
                       size="lg"
                       disabled={formStatus === "loading"}
                     >
-                      <span className="relative z-10 flex items-center gap-2">
+                      <span className="relative z-10 flex items-center gap-2 text-sm sm:text-base">
                         {formStatus === "loading" ? (
                           <>
-                            <Loader2 className="h-5 w-5 animate-spin" />
+                            <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
                             Sending...
                           </>
                         ) : (
                           <>
                             Send Message
-                            <SendIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            <SendIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:translate-x-1 transition-transform" />
                           </>
                         )}
                       </span>
