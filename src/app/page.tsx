@@ -4,7 +4,6 @@ import About from "./(About)/About";
 import Skill from "./(Skills)/Skill";
 import Project from "./(Projects)/Project";
 import Contact from "./(Contact)/Contact";
-import AppNavbar from "@/components/app-navbar";
 import Experience from "./(Experience)/Experience";
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
       <div className="h-screen w-full bg-primary-foreground">
         <Navbar />
         <Herobody />
-        <AppNavbar /> {/* Display only at mobile for bottom Navbar */}
       </div>
       <About />
       <Skill />
