@@ -217,7 +217,6 @@ const Navbar = () => {
             </DropdownMenu>
             <motion.h3
               className="font-medium text-sm sm:text-base flex items-center group-hover:text-primary transition-colors duration-300 cursor-pointer"
-              initial={{ opacity: 0 }}
               whileHover={{ color: "hsl(var(--primary))" }}
             >
               Sujal Kesharwani
