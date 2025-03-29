@@ -24,10 +24,10 @@ const About = () => {
   return (
     <div id="about" className="overflow-x-hidden py-20 relative">
       {/* Background elements - terminal-like decorations */}
-      <div className="absolute top-20 left-0 opacity-5 text-6xl font-mono">
+      <div className="absolute top-20 left-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
         {"<about>"}
       </div>
-      <div className="absolute bottom-20 right-0 opacity-5 text-6xl font-mono">
+      <div className="absolute bottom-20 right-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
         {"</about>"}
       </div>
 
