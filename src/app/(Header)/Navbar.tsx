@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -21,9 +21,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-
 import { motion, AnimatePresence } from "framer-motion";
-import { Code } from "lucide-react";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -31,10 +29,17 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setTheme, theme } = useTheme();
 
+  // Add refs to track manual navigation and scrolling state
+  const isManualNavigation = useRef(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
   // Track scroll position for navbar styling and active section
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // Don't detect sections if we're in manual navigation mode
+      if (isManualNavigation.current) return;
 
       // Determine active section based on scroll position
       const sections = [
@@ -46,24 +51,39 @@ const Navbar = () => {
         "contact",
       ];
 
-      // Find the section that is currently in view
+      // Find the section that is currently most visible in the viewport
+      let maxVisibleSection = "";
+      let maxVisibleHeight = 0;
+
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Consider a section to be active when its top is near the top of the viewport (accounting for navbar)
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            if (activeSection !== section) {
-              setActiveSection(section);
-            }
-            break;
+
+          // Get responsive navbar height
+          const navbarHeight = window.innerWidth < 640 ? 60 : 80;
+
+          // Calculate how much of the section is visible in the viewport
+          const visibleTop = Math.max(rect.top, navbarHeight);
+          const visibleBottom = Math.min(rect.bottom, window.innerHeight);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+          // If this section has more visible area than previous max, make it the active section
+          if (visibleHeight > maxVisibleHeight) {
+            maxVisibleHeight = visibleHeight;
+            maxVisibleSection = section;
           }
         }
+      }
+
+      // Only update if we found a visible section and it's different from current
+      if (maxVisibleSection && maxVisibleSection !== activeSection) {
+        setActiveSection(maxVisibleSection);
       }
     };
 
     // Initialize on first render
-    setTimeout(handleScroll, 100);
+    setTimeout(handleScroll, 300);
 
     // Add event listener
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -77,18 +97,31 @@ const Navbar = () => {
     const element = document.getElementById(sectionId);
     if (!element) return;
 
-    // Get the navbar height to use as offset
-    const navbarHeight = 80; // Approximate height of your navbar in pixels
+    // Mark that we're doing manual navigation
+    isManualNavigation.current = true;
+
+    // Set active section immediately for UI feedback
+    setActiveSection(sectionId);
+
+    // Get responsive navbar height
+    const navbarHeight = window.innerWidth < 640 ? 60 : 80;
 
     // Calculate the position to scroll to
     const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+    const offsetPosition = elementPosition + window.scrollY - navbarHeight;
 
     // Smooth scroll to the element
     window.scrollTo({
       top: offsetPosition,
       behavior: "smooth",
     });
+
+    // Reset manual navigation flag after scrolling finishes
+    // This allows time for the scroll to complete before resuming automatic detection
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      isManualNavigation.current = false;
+    }, 1000); // Wait 1 second after clicking before resuming scroll detection
   };
 
   const navLinks = [
@@ -104,31 +137,36 @@ const Navbar = () => {
     <>
       {/* Desktop Navigation */}
       <nav
-        className={`sm:flex hidden w-full md:fixed py-4 px-6 justify-between items-center z-50 transition-all duration-500 ${
+        className={`sm:flex hidden w-full fixed py-3 sm:py-4 px-4 sm:px-6 justify-between items-center z-50 transition-all duration-500 lg:px-20 xl:px-32 2xl:px-40 ${
           isScrolled
-            ? "bg-background/90 backdrop-blur-md shadow-md border-b border-primary/10"
+            ? "bg-background/95 backdrop-blur-md shadow-md border-b border-primary/10"
             : "bg-background/50 backdrop-blur-sm"
         }`}
       >
-        <div className="w-1/3 flex-col flex items-center">
+        {/* Logo/Avatar area - adjusted for better small screen support */}
+        <div className="w-auto sm:w-1/3 flex items-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex space-x-3 items-center justify-center"
+            className="flex space-x-2 sm:space-x-3 items-center group"
           >
-            {/* Fix: Properly structure the DropdownMenu with separate Trigger component */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Avatar className="ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md cursor-pointer">
-                  <AvatarImage
-                    src="https://github.com/Sujal12344.png"
-                    alt="Profile"
-                  />
-                  <AvatarFallback>
-                    <span className="text-xs">Sujal</span>
-                  </AvatarFallback>
-                </Avatar>
+                <Button
+                  variant="ghost"
+                  className="p-0 h-auto w-auto rounded-full"
+                >
+                  <Avatar className="h-9 w-9 ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md cursor-pointer">
+                    <AvatarImage
+                      src="https://github.com/Sujal12344.png"
+                      alt="Profile"
+                    />
+                    <AvatarFallback>
+                      <span className="text-xs">SK</span>
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="center">
+              <DropdownMenuContent align="start" className="w-56">
                 <DropdownMenuLabel>Connect with me</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
@@ -178,7 +216,8 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             <motion.h3
-              className="font-medium ml-2 flex items-center gap-1"
+              className="font-medium text-sm sm:text-base flex items-center group-hover:text-primary transition-colors duration-300 cursor-pointer"
+              initial={{ opacity: 0 }}
               whileHover={{ color: "hsl(var(--primary))" }}
             >
               Sujal Kesharwani
@@ -186,7 +225,8 @@ const Navbar = () => {
           </motion.div>
         </div>
 
-        <ul className="w-1/2 flex cursor-pointer mr-2 md:mr-2 items-center space-x-6 justify-center">
+        {/* Navigation Links - improved responsive spacing */}
+        <ul className="flex flex-grow justify-center items-center space-x-2 sm:space-x-4 md:space-x-6">
           {navLinks.map((link) => (
             <motion.li
               key={link.name}
@@ -196,7 +236,7 @@ const Navbar = () => {
                 transition: { duration: 0.2 },
               }}
               whileTap={{ scale: 0.95 }}
-              className={`relative px-3 py-2 rounded-md transition-all duration-300 ${
+              className={`relative px-2 sm:px-3 py-1.5 sm:py-2 rounded-md transition-all duration-300 text-sm ${
                 activeSection === link.href.substring(1)
                   ? "text-primary font-medium bg-primary/5"
                   : "hover:bg-secondary/80"
@@ -205,11 +245,8 @@ const Navbar = () => {
               <a
                 href={link.href}
                 onClick={(e) => {
-                  // Add smooth scrolling with a slight delay for better UX
                   e.preventDefault();
-                  const href = link.href;
-                  const targetId = href.replace("#", "");
-                  const element = document.getElementById(targetId);
+                  const targetId = link.href.replace("#", "");
 
                   // Highlight clicked item immediately for better feedback
                   setActiveSection(targetId);
@@ -217,14 +254,12 @@ const Navbar = () => {
                   // Close mobile menu if open
                   if (isMobileMenuOpen) setIsMobileMenuOpen(false);
 
-                  // Smooth scroll with slight delay for better UX
-                  setTimeout(() => {
-                    element?.scrollIntoView({ behavior: "smooth" });
-                  }, 100);
+                  // Use custom scroll function
+                  scrollToSection(targetId);
                 }}
-                className="flex items-center justify-center space-x-1"
+                className="flex items-center justify-center"
               >
-                <span>{link.name}</span>
+                {link.name}
               </a>
 
               {/* Enhanced active indicator with animation */}
@@ -239,37 +274,39 @@ const Navbar = () => {
               )}
             </motion.li>
           ))}
-          <li>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                  <span className="sr-only">Toggle theme</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  <Sun className="mr-2 h-4 w-4" /> Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  <Moon className="mr-2 h-4 w-4" /> Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </li>
         </ul>
+
+        {/* Theme Switcher */}
+        <div className="flex-shrink-0">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <span className="sr-only">Toggle theme</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setTheme("light")}>
+                <Sun className="mr-2 h-4 w-4" /> Light
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <Moon className="mr-2 h-4 w-4" /> Dark
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("system")}>
+                System
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </nav>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Enhanced and fixed */}
       <nav
-        className={`sm:hidden fixed top-0 left-0 right-0 z-50 p-4 ${
+        className={`sm:hidden fixed top-0 left-0 right-0 z-50 p-3 ${
           isScrolled
-            ? "bg-background/90 backdrop-blur-md shadow-sm"
-            : "bg-background/50"
+            ? "bg-background/95 backdrop-blur-md shadow-sm"
+            : "bg-background/70 backdrop-blur-sm"
         }`}
       >
         <div className="flex justify-between items-center">
@@ -281,63 +318,85 @@ const Navbar = () => {
               />
               <AvatarFallback>SK</AvatarFallback>
             </Avatar>
-            <span className="font-medium">Sujal Kesharwani</span>
+            <span className="font-medium text-sm">Sujal Kesharwani</span>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
+          <div className="flex items-center space-x-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="h-8 w-8"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+              className="h-8 w-8"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </div>
 
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg shadow-lg border-t dark:border-gray-800 rounded-b-lg overflow-hidden"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg shadow-lg border-t border-primary/10 rounded-b-lg overflow-hidden"
             >
               <ul className="py-2">
                 {navLinks.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className={`block px-6 py-3 ${
+                      className={`block px-6 py-3 text-sm ${
                         activeSection === link.href.substring(1)
-                          ? "text-primary font-medium"
+                          ? "text-primary font-medium bg-primary/5"
                           : ""
                       }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const targetId = link.href.replace("#", "");
+
+                        // Set active section
+                        setActiveSection(targetId);
+
+                        // Close the mobile menu
+                        setIsMobileMenuOpen(false);
+
+                        // Use custom scroll function with correct offset
+                        setTimeout(() => {
+                          scrollToSection(targetId);
+                        }, 100);
+                      }}
                     >
                       {link.name}
                     </a>
                   </li>
                 ))}
-                <li className="px-6 py-3 flex items-center justify-between">
-                  <span>Theme</span>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() =>
-                      setTheme(theme === "dark" ? "light" : "dark")
-                    }
-                    aria-label="Toggle theme"
-                  >
-                    {theme === "dark" ? <Sun /> : <Moon />}
-                  </Button>
-                </li>
-                <li className="px-6 py-3 border-t dark:border-gray-800">
-                  <div className="flex space-x-4 justify-center mt-2">
+                <li className="px-6 py-3 border-t border-primary/10">
+                  <div className="flex space-x-6 justify-center mt-2">
                     <a
                       href="https://github.com/Sujal12344"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="GitHub"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <Github className="h-5 w-5" />
                     </a>
@@ -346,6 +405,7 @@ const Navbar = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Twitter"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <Twitter className="h-5 w-5" />
                     </a>
@@ -354,6 +414,7 @@ const Navbar = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="LinkedIn"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <LinkedinIcon className="h-5 w-5" />
                     </a>
@@ -362,6 +423,7 @@ const Navbar = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Resume"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <File className="h-5 w-5" />
                     </a>
