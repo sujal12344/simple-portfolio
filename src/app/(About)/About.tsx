@@ -79,10 +79,10 @@ const About = () => {
             icon={<Component className="h-6 w-6 text-primary" />}
             details="I transform designs into pixel-perfect, responsive interfaces that users love to interact with."
             modalChecks={[
+              "Creating smooth animation, effects that enhance UX (User Experience).",
               "Building responsive layouts that work across all devices and screen sizes.",
               "Implementing interactive elements using modern JavaScript frameworks.",
               "Optimizing for performance with code splitting and lazy loading.",
-              "Creating accessible interfaces that follow WCAG guidelines.",
             ]}
             direction="left"
           />
@@ -94,9 +94,9 @@ const About = () => {
             icon={<Server className="h-6 w-6 text-primary" />}
             details="I build robust APIs and server-side applications that handle complex business logic efficiently."
             modalChecks={[
-              "Designing and implementing RESTful and GraphQL APIs.",
-              "Setting up secure authentication and authorization systems.",
               "Creating efficient database schemas and query optimizations.",
+              "Creating RESTful APIs that enable efficient, scalable data communication.",
+              "Setting up secure authentication and authorization systems.",
               "Implementing caching strategies for better performance.",
             ]}
             direction="bottom"
@@ -109,9 +109,9 @@ const About = () => {
             icon={<Braces className="h-6 w-6 text-primary" />}
             details="I deliver complete applications from concept to deployment, handling both client and server sides."
             modalChecks={[
-              "Architecting complete solutions that integrate front-end and back-end systems.",
-              "Implementing CI/CD pipelines for automated testing and deployment.",
+              "Developing efficient logic with serverless functions using Next.js and TypeScript.",
               "Optimizing entire application stacks for performance and scalability.",
+              "Architecting complete solutions that integrate front-end and back-end systems.",
               "Providing ongoing maintenance and feature development.",
             ]}
             direction="right"
