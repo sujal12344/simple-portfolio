@@ -29,8 +29,10 @@ const DialogModal = ({
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
-        <DialogTitle>{title}</DialogTitle>
-        <div className="grid grid-rows-4 gap-y-5 ">
+        <DialogTitle className="underline underline-offset-4">
+          {title}
+        </DialogTitle>
+        <div className="grid grid-rows-4 gap-y-5">
           <div className="flex items-center gap-x-2">
             <BadgeCheck />
             <h2>{check1}</h2>
