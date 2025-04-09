@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import ReactMarkdown from "react-markdown";
 import {
   Briefcase,
   Calendar,
@@ -20,56 +19,59 @@ import Link from "next/link";
 const experiences = [
   {
     title: "Frontend Developer",
-    company: "CelebralZip Private Limited",
+    company: "Neotix Lab Private Limited",
     location: "Remote",
-    period: "Feb 2024 - July 2024",
-    description: `Worked on the core frontend of the website using React.js, Material UI, TypeScript, and React Redux.`,
+    period: "Sep 2024 - Jan 2025",
+    description: `Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript,  NextUI, framar-motion, and Zustand.`,
     achievements: [
-      "Implemented lazy loading of components in React (lodash) for improved performance",
-      "Created WebSockets to show realtime progress, speed and ETA for uploading large files",
       "Established file structure and refactored large production-ready application",
+      "Managed global state using Zustand",
+      "Implemented responsive design using Tailwind CSS",
+      "Implemented form validation using Zod with Next UI styling",
+      "Implemented lazy loading of components in React (lodash) for improved performance",
       "Debugged code efficiently using React Dev Tools",
-      "Managed global state using Redux and useContext",
-      "Implemented form validation using Formik with Material UI styling",
     ],
     technologies: [
+      "Next.js",
       "React",
       "TypeScript",
-      "Material UI",
-      "Redux",
-      "WebSockets",
-      "Formik",
+      "NextUI",
+      "Tailwind CSS",
+      "Zustand",
+      "Framer Motion",
     ],
     color: "from-blue-500 to-blue-600",
     icon: <Code className="h-5 w-5" />,
   },
   {
     title: "Full Stack Developer",
-    company: "EpiphanyAI",
-    location: "San Francisco, CA (Remote)",
+    company: "DRS SOLAR PRIVATE LIMITED",
+    location: "Remote",
     period: "May 2024 - Present",
     description:
       "A founding engineer who contributed heavily to building the backend using various AI libraries.",
     achievements: [
-      "Collaborated with a seasoned Silicon Valley founder ($400MM in acquisitions)",
-      "Built Vercel AI SDK tooling to support non-standard LLMs (Llama 70B, Qwen) for inference providers like Groq and Fireworks, reducing costs by 80%",
-      "Migrated from Tavily to SearX for sources and media, reducing costs by 90%+",
-      "Implemented parallel generative UI streaming for media and sources (Vercel AI SDK)",
-      "Generated sitemaps for 200K+ queries",
-      "Resolved TTL DevOps errors, client-side exceptions and frontend issues for emergency production fixes",
-      "Created under-the-hood agent functionality for Vercel AI SDK to support widgets",
-      "Developed functionality widgets for weather and finance applications",
-      "Utilized LangChain for object generation in non-supported inference providers",
+      "Built a full-stack application in a team of 5 using Next.js, React.js, TypeScript, and Tailwind CSS.",
+      "Developed a custom backend architecture with Node.js and PostgreSQL for scalable data handling.",
+      "Created robust REST APIs using Express.js to streamline server-side communication.",
+      "Implemented a secure authentication flow using JWT for user verification and access control.",
     ],
     technologies: [
       "Next.js",
+      "React",
       "TypeScript",
-      "Vercel AI SDK",
-      "LangChain",
-      "SearX",
-      "LLMs",
-      "Groq",
-      "Fireworks",
+      "Tailwind CSS",
+      "PostgreSQL",
+      "Prisma",
+      "Neon",
+      "ShadCN",
+      "Zod",
+      "REST API",
+      "react Hook Form",
+      "Tanstack Query",
+      "Zustand",
+      "Framer Motion",
+      "etc",
     ],
     color: "from-emerald-500 to-emerald-600",
     icon: <Terminal className="h-5 w-5" />,
@@ -103,10 +105,13 @@ const useResponsiveLayout = () => {
 // Technology tag component
 const TechTag = ({ name }: { name: string }) => (
   <motion.span
-    className="inline-block bg-primary/10 text-primary text-[10px] xs:text-xs px-1.5 xs:px-2 py-0.5 xs:py-1 rounded-full mr-1.5 xs:mr-2 mb-1.5 xs:mb-2"
+    className="inline-block bg-primary/10 text-primary text-[10px] xs:text-xs px-1.5 xs:px-2 py-0.5 xs:py-1 rounded-full mr-1.5 xs:mr-2 mb-1.5 xs:mb-2
+    font-medium cursor-pointer hover:bg-primary/20 transition-all duration-300"
+    initial={{ opacity: 0, scale: 0.8 }}
+    whileInView={{ opacity: 1, scale: 1 }}
     whileHover={{
       scale: 1.05,
-      backgroundColor: "rgba(var(--primary-rgb), 0.2)",
+      backgroundColor: "rgba(30, 41, 122, 1)",
     }}
   >
     {name}
@@ -411,7 +416,7 @@ const Experience = () => {
             viewport={{ once: true }}
             className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-2 xs:mb-4 tracking-tight"
           >
-            My Professional Journey
+            My Coding Journey
           </motion.h1>
 
           <motion.p
@@ -479,7 +484,9 @@ const Experience = () => {
               className="inline-flex items-center gap-1.5 sm:gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 cursor-pointer font-medium text-sm sm:text-base"
             >
               <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <span>Visit my GitHub</span>
+              <Link href={"https://github.com/sujal12344"} target="_blank">
+                Visit my GitHub
+              </Link>
               <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </motion.div>
           </motion.div>
