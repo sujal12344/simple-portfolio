@@ -14,25 +14,26 @@ type Skill = {
 // Skills data organized by categories
 const skillsData = {
   frontend: [
-    { name: "React", level: 90 },
     { name: "NextJS", level: 85 },
+    { name: "React", level: 90 },
     { name: "Typescript", level: 80 },
-    { name: "HTML5", level: 95 },
     { name: "Tailwind", level: 90 },
   ],
   backend: [
+    { name: "Next.JS", level: 85 },
     { name: "NodeJS", level: 85 },
     { name: "Express", level: 80 },
+    { name: "Prisma", level: 70 },
     { name: "PostgreSQL", level: 75 },
     { name: "MongoDB", level: 80 },
-    { name: "Redis", level: 70 },
   ],
   other: [
-    { name: "AWS", level: 75 },
+    { name: "Git", level: 90 },
+    { name: "Docker", level: 75 },
+    { name: "Stripe", level: 70 },
     { name: "VectorDB", level: 65 },
     { name: "Langchain", level: 70 },
-    { name: "Docker", level: 75 },
-    { name: "Git", level: 90 },
+    { name: "S3", level: 75 },
   ],
 };
 
@@ -130,6 +131,7 @@ const DesktopSkillBubble = ({
   delay: number;
   category: SkillCategory | "core";
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const categoryColors: Record<SkillCategory | "core", string> = {
     frontend:
       "from-blue-500/90 to-blue-600/90 dark:from-blue-600/90 dark:to-blue-700/90",
@@ -157,9 +159,12 @@ const DesktopSkillBubble = ({
     <motion.div
       className={`flex items-center justify-center rounded-full font-medium bg-gradient-to-br ${categoryColors[category]} text-white py-1.5 sm:py-2 px-3 sm:px-4 shadow-lg cursor-pointer absolute text-sm md:text-base backdrop-blur-sm border border-white/10`}
       whileHover={{
-        scale: 1.1,
+        scale: 1.5,
+        zIndex: isHovered ? 50 : 10,
         boxShadow: "0 0 15px rgba(var(--primary-rgb)/0.5)",
       }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
       initial={{ x: 0, y: 0, opacity: 0 }}
       whileInView={{ x, y, opacity: 1 }}
       transition={{
@@ -182,7 +187,7 @@ const DesktopSkillBubble = ({
 const calculateDesktopPositions = (totalSkills: number) => {
   const positions = [];
   const angleStep = (2 * Math.PI) / totalSkills;
-  const radius = 180;
+  const radius = 230;
 
   for (let i = 0; i < totalSkills; i++) {
     const angle = i * angleStep;
@@ -245,7 +250,7 @@ const Skill = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-6 sm:mb-10 md:mb-12 flex flex-col items-center"
+          className="mb-6 sm:mb-10 md:mb-8 flex flex-col items-center"
         >
           <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
             <div className="h-px w-3 sm:w-5 bg-primary" />
@@ -284,7 +289,7 @@ const Skill = () => {
         </motion.div>
 
         {/* Category filters */}
-        <div className="flex justify-center mb-6 sm:mb-10 flex-wrap gap-2 sm:gap-4">
+        <div className="flex justify-center mb-6 sm:mb-20 flex-wrap gap-2 sm:gap-4">
           {["all", "frontend", "backend", "other"].map((category) => (
             <motion.button
               key={category}
@@ -370,7 +375,7 @@ const Skill = () => {
 
             {/* Core tech bubble */}
             <motion.div
-              className="flex items-center justify-center rounded-full font-semibold bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg cursor-pointer z-10 text-lg md:text-xl p-6 md:p-8 backdrop-blur-sm border border-white/10"
+              className="flex items-center justify-center rounded-full font-semibold bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg cursor-pointer z-10 text-lg md:text-xl p-2 md:p-4 px-6 backdrop-blur-sm border border-white/10"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 20px rgba(var(--primary-rgb)/0.6)",
@@ -380,9 +385,9 @@ const Skill = () => {
                 transition: { duration: 3, repeat: Infinity },
               }}
             >
-              <Code className="mr-2 h-5 w-5 md:h-6 md:w-6" />
+              {/* <Code className="mr-2 h-5 w-5 md:h-6 md:w-6">"Tech stack"</Code> */}
               {activeCategory === "all"
-                ? "Tech"
+                ? "< Tech stack >"
                 : activeCategory === "frontend"
                 ? "Frontend"
                 : activeCategory === "backend"
@@ -408,7 +413,7 @@ const Skill = () => {
         )}
 
         {/* Skill bars section for details */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -481,7 +486,7 @@ const Skill = () => {
               </div>
             </motion.div>
           )}
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );
