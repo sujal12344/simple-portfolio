@@ -105,8 +105,7 @@ const useResponsiveLayout = () => {
 // Technology tag component
 const TechTag = ({ name }: { name: string }) => (
   <motion.span
-    className="inline-block bg-primary/10 text-primary text-[10px] xs:text-xs px-1.5 xs:px-2 py-0.5 xs:py-1 rounded-full mr-1.5 xs:mr-2 mb-1.5 xs:mb-2
-    font-medium cursor-pointer hover:bg-primary/20 transition-all duration-300"
+    className="inline-block bg-primary/10 text-primary text-[10px] xs:text-xs px-1.5 xs:px-2 py-0.5 xs:py-1 rounded-full mr-1.5 xs:mr-2 mb-1.5 xs:mb-2 cursor-pointer"
     initial={{ opacity: 0, scale: 0.8 }}
     whileInView={{ opacity: 1, scale: 1 }}
     whileHover={{
@@ -400,7 +399,7 @@ const Experience = () => {
             <motion.span
               whileHover={{
                 scale: 1.05,
-                backgroundColor: "hsl(var(--primary)/0.15)",
+                backgroundColor: "rgba(38, 54, 179, 0.15)",
               }}
               className="text-primary font-mono text-xs xs:text-sm px-2 xs:px-3 py-0.5 xs:py-1 rounded-full bg-primary/10 border border-primary/20"
             >

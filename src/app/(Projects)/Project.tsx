@@ -101,7 +101,7 @@ const Project = () => {
             <motion.span
               whileHover={{
                 scale: 1.05,
-                backgroundColor: "hsl(var(--primary)/0.15)",
+                backgroundColor: "rgba(38, 54, 179, 0.15)",
               }}
               className="text-primary font-mono text-sm px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
             >
