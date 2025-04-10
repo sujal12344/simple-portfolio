@@ -199,7 +199,7 @@ const Contact = () => {
                   </motion.a>
 
                   <motion.a
-                    href="https://cal.com/whycurious101"
+                    href="https://cal.com/childish"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 sm:gap-4 group cursor-pointer p-2 sm:p-3 rounded-lg hover:bg-primary/5 transition-colors"
@@ -257,7 +257,7 @@ const Contact = () => {
                         className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
-                          href="https://twitter.com/whycurious101"
+                          href="https://twitter.com/Sujalkeshar220"
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="Twitter"

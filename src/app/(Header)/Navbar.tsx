@@ -184,7 +184,7 @@ const Navbar = () => {
                   <a
                     className="flex items-center w-full"
                     target="_blank"
-                    href="https://twitter.com/whycurious101"
+                    href="https://twitter.com/Sujalkeshar220"
                     rel="noopener noreferrer"
                   >
                     <Twitter className="mr-2 h-4 w-4" />
@@ -400,7 +400,7 @@ const Navbar = () => {
                       <Github className="h-5 w-5" />
                     </a>
                     <a
-                      href="https://twitter.com/whycurious101"
+                      href="https://twitter.com/Sujalkeshar220"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Twitter"
@@ -418,7 +418,7 @@ const Navbar = () => {
                       <LinkedinIcon className="h-5 w-5" />
                     </a>
                     <a
-                      href="https://dhrishp.tiiny.site"
+                      href="https://childish.tiiny.site/"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Resume"
