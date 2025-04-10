@@ -299,7 +299,7 @@ const Contact = () => {
                         className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
-                          href="https://dhrishp.tiiny.site"
+                          href="https://childish.tiiny.site/"
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="Resume"

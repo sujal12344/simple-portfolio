@@ -206,7 +206,7 @@ const Navbar = () => {
                   <a
                     className="flex items-center w-full"
                     target="_blank"
-                    href="https://dhrishp.tiiny.site"
+                    href="https://childish.tiiny.site"
                     rel="noopener noreferrer"
                   >
                     <File className="mr-2 h-4 w-4" />
