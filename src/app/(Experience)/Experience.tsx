@@ -20,6 +20,7 @@ const experiences = [
   {
     title: "Frontend Developer",
     company: "Neotix Lab Private Limited",
+    companyLink: "https://raffl.pro/",
     location: "Remote",
     period: "Sep 2024 - Jan 2025",
     description: `Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript,  NextUI, framar-motion, and Zustand.`,
@@ -45,7 +46,8 @@ const experiences = [
   },
   {
     title: "Full Stack Developer",
-    company: "DRS SOLAR PRIVATE LIMITED",
+    company: "ParivartanX PRIVATE LIMITED",
+    companyLink: "https://parivartanx.com/",
     location: "Remote",
     period: "May 2024 - Present",
     description:
@@ -137,6 +139,7 @@ const AchievementItem = ({ text }: { text: string }) => (
 const ExperienceCard = ({
   title,
   company,
+  companyLink,
   location,
   period,
   description,
@@ -149,6 +152,7 @@ const ExperienceCard = ({
 }: {
   title: string;
   company: string;
+  companyLink: string;
   location?: string;
   period: string;
   description: string;
@@ -196,14 +200,9 @@ const ExperienceCard = ({
       viewport={{ once: true, amount: 0.2 }}
       className={`relative z-10 mb-10 sm:mb-16 ${cardPosition}`}
     >
-      {/* Date indicator for desktop */}
+      {/* Date indicator for desktop - MOVED TO HIGHER Z-INDEX */}
       <motion.div
-        className={`hidden md:flex absolute top-6 ${
-          // isEven
-          // ?
-          "right-0 translate-x-full pr-8"
-          // : "left-0 -translate-x-full pl-8"
-        } items-center space-x-2 text-muted-foreground`}
+        className={`hidden md:flex absolute top-6 ${"right-0 translate-x-full pr-8"} items-center space-x-2 text-muted-foreground z-30`}
         initial={{ opacity: 0, x: isEven ? 50 : -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
@@ -218,7 +217,7 @@ const ExperienceCard = ({
           y: -5,
           boxShadow: "0 10px 30px -15px rgba(var(--primary-rgb), 0.15)",
         }}
-        className="bg-card border border-primary/10 rounded-lg overflow-hidden shadow-md transition-all duration-300"
+        className="bg-card border border-primary/10 rounded-lg overflow-hidden shadow-md transition-all duration-300 z-20 relative"
       >
         {/* Header with gradient */}
         <div className={`bg-gradient-to-r ${color} h-1.5 xs:h-2 w-full`} />
@@ -238,7 +237,15 @@ const ExperienceCard = ({
                     {title}
                   </h3>
                   <div className="flex items-center text-muted-foreground text-xs xs:text-sm">
-                    <span className="font-medium">{company}</span>
+                    <span
+                      className="font-medium cursor-pointer hover:text-blue-500 transition-colors duration-200"
+                      // Open company link in new tab
+                      onClick={() => {
+                        window.open(companyLink, "_blank");
+                      }}
+                    >
+                      {company}
+                    </span>
                     {location && (
                       <>
                         <span className="mx-1 xs:mx-2">•</span>
@@ -261,7 +268,7 @@ const ExperienceCard = ({
             </div>
 
             {/* Description section */}
-            <p className="text-xs xs:text-sm text-muted-foreground mb-3 xs:mb-4">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-3 xs:mb-4">
               {description}
             </p>
 
