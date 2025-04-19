@@ -267,7 +267,7 @@ const Contact = () => {
                       </Button>
                     </motion.div>
 
-                    <motion.div
+                    {/* <motion.div
                       whileHover={{ y: -5 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -286,7 +286,7 @@ const Contact = () => {
                           <LinkedinIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </a>
                       </Button>
-                    </motion.div>
+                    </motion.div> */}
 
                     <motion.div
                       whileHover={{ y: -5 }}

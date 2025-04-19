@@ -191,7 +191,7 @@ const Navbar = () => {
                     <span>Twitter</span>
                   </a>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
+                {/* <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
                   <a
                     className="flex items-center w-full"
                     target="_blank"
@@ -201,7 +201,7 @@ const Navbar = () => {
                     <LinkedinIcon className="mr-2 h-4 w-4" />
                     <span>LinkedIn</span>
                   </a>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
                   <a
                     className="flex items-center w-full"
@@ -408,7 +408,7 @@ const Navbar = () => {
                     >
                       <Twitter className="h-5 w-5" />
                     </a>
-                    <a
+                    {/* <a
                       href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -416,7 +416,7 @@ const Navbar = () => {
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <LinkedinIcon className="h-5 w-5" />
-                    </a>
+                    </a> */}
                     <a
                       href="https://childish.tiiny.site/"
                       target="_blank"

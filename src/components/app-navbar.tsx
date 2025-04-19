@@ -54,13 +54,13 @@ const AppNavbar = () => {
                       <TwitterIcon className="h-4 w-4" />
                       <h3>Twitter</h3>
                     </Link>
-                    <Link
+                    {/* <Link
                       href=""
                       className="flex items-center hover:bg-primary-foreground space-x-2 border-muted border rounded px-1 mb-2 cursor-pointer py-2   "
                     >
                       <LinkedinIcon className="h-4 w-4" />
                       <h3>Linkedin</h3>
-                    </Link>
+                    </Link> */}
                   </ul>
                 </PopoverContent>
               </PopoverTrigger>

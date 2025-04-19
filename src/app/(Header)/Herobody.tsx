@@ -118,17 +118,25 @@ const Herobody = () => {
               Tech Stack
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {["React", "Next.js", "TypeScript", "Tailwind"].map((tech, i) => (
-                <motion.span
-                  key={tech}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
-                  className="px-2 py-1 rounded-md bg-secondary text-sm font-medium"
-                >
-                  {tech}
-                </motion.span>
-              ))}
+              {["Next.js", "TypeScript", "PostgreSQL", "Prisma"].map(
+                (tech, i) => (
+                  <motion.span
+                    key={tech}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
+                    className="px-2 py-1 rounded-md bg-secondary text-sm font-medium hover:bg-primary/10 transition-colors duration-200 cursor-pointer"
+                    onClick={() => {
+                      window.open(
+                        `https://www.google.com/search?q=${tech}`,
+                        "_blank"
+                      );
+                    }}
+                  >
+                    {tech}
+                  </motion.span>
+                )
+              )}
             </div>
           </motion.div>
         </motion.div>
