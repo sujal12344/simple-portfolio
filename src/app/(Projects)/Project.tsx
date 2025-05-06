@@ -39,7 +39,7 @@ const allCategories = Array.from(
 );
 
 const Project = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("Other");
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
