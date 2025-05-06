@@ -1,6 +1,14 @@
 [
   {
     "id": 1,
+    "title": "Socially",
+    "description": "A modern social media platform built with Next.js, React, and TypeScript. Features user authentication, posts, comments, likes, messaging, friend requests, notifications, and customizable profiles with dark/light mode support.",
+    "github": "https://github.com/sujal12344/Socially",
+    "ImageUrl": "/images/Socially.png",
+    "websiteUrl": "https://socially-blond.vercel.app/"
+  },
+  {
+    "id": 2,
     "title": "AI Companion",
     "description": "AI-Companion is a cool software that lets you create your own custom AI models of people you admire, like actors or celebrities. It's a tool to make personalized artificial intelligence companions based on your favorite individuals.",
     "github": "https://github.com/sujal12344/AI-Companion-Builder",
@@ -8,7 +16,7 @@
     "websiteUrl": "https://ai-companion-builder.vercel.app/"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Chatting Application",
     "description": "A real-time chat application using the MERN stack (MongoDB, Express, React, Node.js) with Socket.IO for instant messaging. The app should enable user account creation, secure real-time communication, and deliver a smooth, responsive chat experience.",
     "github": "https://github.com/sujal12344/chat-app",
@@ -16,7 +24,7 @@
     "websiteUrl": "https://chat-app-fyek.onrender.com/"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "E-Commernce-Store",
     "description": "An E-Commernce-Store where user easily buy good quality clothes and stylish shoes, glasses, bags, accessories, etc.",
     "github": "https://github.com/sujal12344/E-commernce-website",
