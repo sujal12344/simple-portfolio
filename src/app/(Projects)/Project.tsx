@@ -25,6 +25,7 @@ interface ProjectType {
   color: string;
   categories?: string[];
   technologies?: string[];
+  isFeatured?: boolean;
 }
 
 // TypeScript assertion to ensure proper type for ProjectData
@@ -49,6 +50,7 @@ const Project = () => {
   const filteredProjects = typedProjectData.filter((project) => {
     const matchesCategory =
       activeCategory === "All" ||
+      (activeCategory === "Other" && project.isFeatured === false) ||
       (project.categories && project.categories.includes(activeCategory));
 
     const matchesSearch =
@@ -58,7 +60,6 @@ const Project = () => {
     return matchesCategory && matchesSearch;
   });
 
-  // Stagger animation for project cards
   useEffect(() => {
     if (isInView) {
       controls.start((i) => ({
@@ -73,8 +74,9 @@ const Project = () => {
     }
   }, [isInView, controls, filteredProjects.length]);
 
-  // Featured projects (first 3)
-  const featuredProjects = typedProjectData.slice(0, 3);
+  const featuredProjects = typedProjectData.filter(
+    (project) => project.isFeatured
+  );
 
   return (
     <div className="relative py-20 overflow-hidden bg-background" id="projects">
