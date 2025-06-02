@@ -2,83 +2,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import {
-  Briefcase,
   Calendar,
   ChevronRight,
-  Code,
   ExternalLink,
   Github,
-  Globe,
-  Star,
-  Terminal,
-  User,
 } from "lucide-react";
 import Link from "next/link";
-
-// Enhanced experience data with added fields for better UI
-const experiences = [
-  {
-    title: "Frontend Developer",
-    company: "Neotix Lab Private Limited",
-    companyLink: "https://raffl.pro/",
-    location: "Remote",
-    period: "Sep 2024 - Jan 2025",
-    description: `Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript,  NextUI, framar-motion, and Zustand.`,
-    achievements: [
-      "Established file structure and refactored large production-ready application",
-      "Managed global state using Zustand",
-      "Implemented responsive design using Tailwind CSS",
-      "Implemented form validation using Zod with Next UI styling",
-      "Implemented lazy loading of components in React (lodash) for improved performance",
-      "Debugged code efficiently using React Dev Tools",
-    ],
-    technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "NextUI",
-      "Tailwind CSS",
-      "Zustand",
-      "Framer Motion",
-    ],
-    color: "from-blue-500 to-blue-600",
-    icon: <Code className="h-5 w-5" />,
-  },
-  {
-    title: "Full Stack Developer",
-    company: "ParivartanX PRIVATE LIMITED",
-    companyLink: "https://parivartanx.com/",
-    location: "Remote",
-    period: "May 2024 - Present",
-    description:
-      "A founding engineer who contributed heavily to building the backend using various AI libraries.",
-    achievements: [
-      "Built a full-stack application in a team of 5 using Next.js, React.js, TypeScript, and Tailwind CSS.",
-      "Developed a custom backend architecture with Node.js and PostgreSQL for scalable data handling.",
-      "Created robust REST APIs using Express.js to streamline server-side communication.",
-      "Implemented a secure authentication flow using JWT for user verification and access control.",
-    ],
-    technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "PostgreSQL",
-      "Prisma",
-      "Neon",
-      "ShadCN",
-      "Zod",
-      "REST API",
-      "react Hook Form",
-      "Tanstack Query",
-      "Zustand",
-      "Framer Motion",
-      "etc",
-    ],
-    color: "from-emerald-500 to-emerald-600",
-    icon: <Terminal className="h-5 w-5" />,
-  },
-];
+import { experiences } from "../../../data/data";
 
 // Custom hook for responsive design
 const useResponsiveLayout = () => {

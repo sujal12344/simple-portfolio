@@ -1,7 +1,7 @@
 "use client";
 import { motion, useAnimation, useInView } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
-import ProjectData from "../../../data/data.json";
+import { ProjectData } from "../../../data/data";
 import {
   ArrowRight,
   Code,
