@@ -22,6 +22,7 @@ import {
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { personalData } from "../../../data/data";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -133,6 +134,11 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const {
+    name,
+    links: { twitter, github, linkedin, resume },
+  } = personalData;
+
   return (
     <>
       {/* Desktop Navigation */}
@@ -156,10 +162,7 @@ const Navbar = () => {
                   className="p-0 h-auto w-auto rounded-full"
                 >
                   <Avatar className="h-9 w-9 ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md cursor-pointer">
-                    <AvatarImage
-                      src="https://github.com/Sujal12344.png"
-                      alt="Profile"
-                    />
+                    <AvatarImage src={`${github}.png`} alt="Profile" />
                     <AvatarFallback>
                       <span className="text-xs">SK</span>
                     </AvatarFallback>
@@ -173,7 +176,7 @@ const Navbar = () => {
                   <a
                     className="flex items-center w-full"
                     target="_blank"
-                    href="https://github.com/Sujal12344"
+                    href={github}
                     rel="noopener noreferrer"
                   >
                     <Github className="mr-2 h-4 w-4" />
@@ -184,29 +187,29 @@ const Navbar = () => {
                   <a
                     className="flex items-center w-full"
                     target="_blank"
-                    href="https://twitter.com/Sujalkeshar220"
+                    href={twitter}
                     rel="noopener noreferrer"
                   >
                     <Twitter className="mr-2 h-4 w-4" />
                     <span>Twitter</span>
                   </a>
                 </DropdownMenuItem>
-                {/* <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
+                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
                   <a
                     className="flex items-center w-full"
                     target="_blank"
-                    href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
+                    href={linkedin}
                     rel="noopener noreferrer"
                   >
                     <LinkedinIcon className="mr-2 h-4 w-4" />
                     <span>LinkedIn</span>
                   </a>
-                </DropdownMenuItem> */}
+                </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
                   <a
                     className="flex items-center w-full"
                     target="_blank"
-                    href="https://childish.tiiny.site"
+                    href={resume}
                     rel="noopener noreferrer"
                   >
                     <File className="mr-2 h-4 w-4" />
@@ -219,7 +222,7 @@ const Navbar = () => {
               className="font-medium text-sm sm:text-base flex items-center group-hover:text-primary transition-colors duration-300 cursor-pointer"
               whileHover={{ color: "hsl(var(--primary))" }}
             >
-              Sujal Kesharwani
+              {name}
             </motion.h3>
           </motion.div>
         </div>
@@ -311,13 +314,10 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src="https://github.com/Sujal12344.png"
-                alt="Profile"
-              />
+              <AvatarImage src={`${github}.png`} alt="Profile" />
               <AvatarFallback>SK</AvatarFallback>
             </Avatar>
-            <span className="font-medium text-sm">Sujal Kesharwani</span>
+            <span className="font-medium text-sm">{name}</span>
           </div>
           <div className="flex items-center space-x-1">
             <Button
@@ -391,7 +391,7 @@ const Navbar = () => {
                 <li className="px-6 py-3 border-t border-primary/10">
                   <div className="flex space-x-6 justify-center mt-2">
                     <a
-                      href="https://github.com/Sujal12344"
+                      href={github}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="GitHub"
@@ -400,7 +400,7 @@ const Navbar = () => {
                       <Github className="h-5 w-5" />
                     </a>
                     <a
-                      href="https://twitter.com/Sujalkeshar220"
+                      href={twitter}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Twitter"
@@ -408,17 +408,17 @@ const Navbar = () => {
                     >
                       <Twitter className="h-5 w-5" />
                     </a>
-                    {/* <a
-                      href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
+                    <a
+                      href={linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="LinkedIn"
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <LinkedinIcon className="h-5 w-5" />
-                    </a> */}
+                    </a>
                     <a
-                      href="https://childish.tiiny.site/"
+                      href={resume}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Resume"

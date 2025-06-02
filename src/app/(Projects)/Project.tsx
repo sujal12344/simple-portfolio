@@ -1,7 +1,7 @@
 "use client";
 import { motion, useAnimation, useInView } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
-import { ProjectData } from "../../../data/data";
+import { personalData, ProjectData } from "../../../data/data";
 import {
   ArrowRight,
   Code,
@@ -77,6 +77,10 @@ const Project = () => {
   const featuredProjects = typedProjectData.filter(
     (project) => project.isFeatured
   );
+
+  const {
+    links: { github },
+  } = personalData;
 
   return (
     <div className="relative py-20 overflow-hidden bg-background" id="projects">
@@ -430,7 +434,7 @@ const Project = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.a
-              href="https://github.com/sujal12344"
+              href={github}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -2 }}

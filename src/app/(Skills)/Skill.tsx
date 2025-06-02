@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
-import { Code, Braces, Server, Globe, Cpu, ArrowRight } from "lucide-react";
+import { Code, Braces, Server, Cpu } from "lucide-react";
 
 // Define types for skills and categories
 type SkillCategory = "frontend" | "backend" | "other";

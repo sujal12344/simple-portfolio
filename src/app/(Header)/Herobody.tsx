@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { LeafyGreen, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { personalData } from "../../../data/data";
 
 const Herobody = () => {
+  const { name, bio } = personalData;
   return (
     <div className="overflow-x-hidden">
       <div
@@ -40,7 +42,7 @@ const Herobody = () => {
               </span>
             </motion.div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 tracking-tight">
-              Sujal Kesharwani
+              {name}
               <span
                 role="img"
                 aria-label="waving hand"
@@ -63,9 +65,7 @@ const Herobody = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-md leading-relaxed"
           >
-            Hi, I'm Sujal Kesharwani, a full stack developer with experience in
-            building scalable web apps using modern industry technologies. I'm
-            always curious and excited to explore new things.
+            {bio}
           </motion.p>
 
           <motion.div
@@ -154,7 +154,7 @@ const Herobody = () => {
               <Image
                 src="/images/Sujal.jpg"
                 className="rounded-full object-cover border-4 border-background shadow-2xl"
-                alt="Profile picture of Sujal Kesharwani"
+                alt={`Profile picture of {name}`}
                 width={280}
                 height={280}
                 sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 340px"

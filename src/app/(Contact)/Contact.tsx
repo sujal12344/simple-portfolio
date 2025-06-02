@@ -14,6 +14,7 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
+import { personalData } from "../../../data/data";
 
 const Contact = () => {
   const [formStatus, setFormStatus] = useState<
@@ -93,6 +94,9 @@ const Contact = () => {
       transition: { type: "spring", stiffness: 100 },
     },
   };
+  const {
+    links: { github, linkedin, twitter, resume },
+  } = personalData;
 
   return (
     <div
@@ -236,7 +240,7 @@ const Contact = () => {
                         className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
-                          href="https://github.com/sujal12344"
+                          href={github}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="GitHub"
@@ -257,7 +261,7 @@ const Contact = () => {
                         className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
-                          href="https://twitter.com/Sujalkeshar220"
+                          href={twitter}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="Twitter"
@@ -266,27 +270,6 @@ const Contact = () => {
                         </a>
                       </Button>
                     </motion.div>
-
-                    {/* <motion.div
-                      whileHover={{ y: -5 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Button
-                        asChild
-                        variant="outline"
-                        size="icon"
-                        className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
-                      >
-                        <a
-                          href="https://www.linkedin.com/in/sujal-kesharwani-978632258/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label="LinkedIn"
-                        >
-                          <LinkedinIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-                        </a>
-                      </Button>
-                    </motion.div> */}
 
                     <motion.div
                       whileHover={{ y: -5 }}
@@ -299,7 +282,28 @@ const Contact = () => {
                         className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
                       >
                         <a
-                          href="https://childish.tiiny.site/"
+                          href={linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="LinkedIn"
+                        >
+                          <LinkedinIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </a>
+                      </Button>
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={{ y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="icon"
+                        className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-primary hover:text-white transition-all duration-300 border-primary/30"
+                      >
+                        <a
+                          href={resume}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="Resume"

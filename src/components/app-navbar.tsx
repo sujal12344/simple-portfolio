@@ -19,9 +19,11 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { personalData } from "../../data/data";
 
 const AppNavbar = () => {
   const theme = useTheme();
+  const {links:{github, linkedin, resume, twitter}} = personalData
   return (
     <>
       <div className="md:hidden  w-full fixed bottom-0 z-10">
@@ -33,7 +35,7 @@ const AppNavbar = () => {
                   <AvatarImage
                     height={50}
                     width={50}
-                    src="https://github.com/sujal12344.png  "
+                    src={`${github}.png`}
                     alt="@shadcn"
                   />
                   <AvatarFallback>PFP</AvatarFallback>
@@ -41,26 +43,26 @@ const AppNavbar = () => {
                 <PopoverContent className="w-[35vw]">
                   <ul>
                     <Link
-                      href="https://github.com/Sujal12344"
+                      href={github}
                       className="flex items-center hover:bg-primary-foreground space-x-2 border-muted border rounded px-1 mb-2 cursor-pointer py-2   "
                     >
                       <GithubIcon className="h-4 w-4" />
                       <h3>Github</h3>
                     </Link>
                     <Link
-                      href="https://twitter.com/Sujalkeshar220"
+                      href={twitter}
                       className="flex items-center hover:bg-primary-foreground space-x-2 border-muted border rounded px-1 mb-2 cursor-pointer py-2   "
                     >
                       <TwitterIcon className="h-4 w-4" />
                       <h3>Twitter</h3>
                     </Link>
-                    {/* <Link
-                      href=""
+                    <Link
+                      href={linkedin}
                       className="flex items-center hover:bg-primary-foreground space-x-2 border-muted border rounded px-1 mb-2 cursor-pointer py-2   "
                     >
                       <LinkedinIcon className="h-4 w-4" />
                       <h3>Linkedin</h3>
-                    </Link> */}
+                    </Link>
                   </ul>
                 </PopoverContent>
               </PopoverTrigger>

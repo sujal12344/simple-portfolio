@@ -1,14 +1,9 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import {
-  Calendar,
-  ChevronRight,
-  ExternalLink,
-  Github,
-} from "lucide-react";
+import { Calendar, ChevronRight, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
-import { experiences } from "../../../data/data";
+import { experiences, personalData } from "../../../data/data";
 
 // Custom hook for responsive design
 const useResponsiveLayout = () => {
@@ -308,6 +303,10 @@ const Experience = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const y = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
 
+  const {
+    links: { github },
+  } = personalData;
+
   return (
     <div
       className="overflow-hidden py-10 xs:py-12 sm:py-16 md:py-20 relative bg-background"
@@ -420,7 +419,7 @@ const Experience = () => {
               className="inline-flex items-center gap-1.5 sm:gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 cursor-pointer font-medium text-sm sm:text-base"
             >
               <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <Link href={"https://github.com/sujal12344"} target="_blank">
+              <Link href={github} target="_blank">
                 Visit my GitHub
               </Link>
               <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
