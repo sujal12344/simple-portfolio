@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { Code, Braces, Server, Cpu } from "lucide-react";
+import { skillsData } from "../../../data/data";
 
 // Define types for skills and categories
 type SkillCategory = "frontend" | "backend" | "other";
@@ -9,32 +10,6 @@ type Skill = {
   name: string;
   level: number;
   category: SkillCategory;
-};
-
-// Skills data organized by categories
-const skillsData = {
-  frontend: [
-    { name: "NextJS", level: 85 },
-    { name: "React", level: 90 },
-    { name: "Typescript", level: 80 },
-    { name: "Tailwind", level: 90 },
-  ],
-  backend: [
-    { name: "Next.JS", level: 85 },
-    { name: "NodeJS", level: 85 },
-    { name: "Express", level: 80 },
-    { name: "Prisma", level: 70 },
-    { name: "PostgreSQL", level: 75 },
-    { name: "MongoDB", level: 80 },
-  ],
-  other: [
-    { name: "Git", level: 90 },
-    { name: "Docker", level: 75 },
-    { name: "Stripe", level: 70 },
-    { name: "VectorDB", level: 65 },
-    { name: "Langchain", level: 70 },
-    { name: "S3", level: 75 },
-  ],
 };
 
 // Mobile detection hook
