@@ -136,3 +136,14 @@ export const experiences = [
     icon: <Gamepad className="h-5 w-5" />,
   },
 ];
+
+export const personalData = {
+  name: "Sujal Kesharwani",
+  bio: "Hi, I'm Sujal Kesharwani, a full stack developer with experience in building scalable web apps using modern industry technologies. I'm always curious and excited to explore new things.",
+  links: {
+    github: "https://github.com/sujal12344",
+    twitter: "https://twitter.com/Sujalkeshar220",
+    linkedin: "https://www.linkedin.com/in/sujal-kesharwani-518798368/",
+    resume: "https://childish.tiiny.site/",
+  },
+};
