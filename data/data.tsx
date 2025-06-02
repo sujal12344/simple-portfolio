@@ -156,9 +156,9 @@ export const skillsData = {
     { name: "Git", level: 90 },
     { name: "Docker", level: 75 },
     { name: "Stripe", level: 70 },
-    { name: "VectorDB", level: 65 },
-    { name: "Langchain", level: 70 },
-    { name: "S3", level: 75 },
+    // { name: "VectorDB", level: 65 },
+    // { name: "Langchain", level: 70 },
+    // { name: "S3", level: 75 },
   ],
 };
 
