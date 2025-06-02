@@ -327,10 +327,10 @@ const Navbar = () => {
               className="h-8 w-8"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
+              {theme === "light" ? (
                 <Moon className="h-4 w-4" />
+              ) : (
+                <Sun className="h-4 w-4" />
               )}
             </Button>
             <Button
