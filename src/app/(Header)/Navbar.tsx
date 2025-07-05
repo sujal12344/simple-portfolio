@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -18,6 +18,7 @@ import {
   X,
   Moon,
   Sun,
+  MoveLeft,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,8 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showDesktopSocial, setShowDesktopSocial] = useState(false);
+  const [showMobileSocial, setShowMobileSocial] = useState(false);
   const { setTheme, theme } = useTheme();
 
   // Add refs to track manual navigation and scrolling state
@@ -124,6 +127,90 @@ const Navbar = () => {
 
   const initials = name.split(' ').map(n => n[0]).join('');
 
+  // Add this reusable component inside your Navbar component 
+  // (before the return statement)
+  const SocialPanel = ({ 
+    isVisible, 
+    onClose, 
+    variant = "desktop",
+    links 
+  }: { 
+    isVisible: boolean; 
+    onClose: () => void; 
+    variant?: "desktop" | "mobile";
+    links: { 
+      github: string; 
+      twitter: string; 
+      linkedin: string; 
+      resume: string; 
+    }; 
+  }) => {
+    // Adjust styling based on variant
+    const styles = useMemo(() => ({
+      container: variant === "desktop"
+        ? "absolute top-12 left-0 w-[280px] z-50"
+        : "mt-2",
+      iconSize: variant === "desktop" ? "h-4 w-4" : "h-3.5 w-3.5",
+      circleSize: variant === "desktop" ? "w-9 h-9" : "w-8 h-8",
+      labelSize: variant === "desktop" ? "text-[10px] mt-1" : "text-[9px] mt-0.5",
+      animation: variant === "desktop"
+        ? { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: 5 } }
+        : { initial: { opacity: 0, height: 0 }, animate: { opacity: 1, height: "auto" }, exit: { opacity: 0, height: 0 } }
+    }), [variant]);
+
+    const socialItems = [
+      { icon: <Github className={styles.iconSize} />, label: "GitHub", url: links.github },
+      { icon: <Twitter className={styles.iconSize} />, label: "Twitter", url: links.twitter },
+      { icon: <LinkedinIcon className={styles.iconSize} />, label: "LinkedIn", url: links.linkedin },
+      { icon: <File className={styles.iconSize} />, label: "Resume", url: links.resume }
+    ];
+
+    return (
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            {...styles.animation}
+            transition={{ duration: 0.2 }}
+            className={`bg-background/95 backdrop-blur-md border border-primary/10 rounded-lg shadow-lg p-2 ${styles.container}`}
+          >
+            <div className="flex justify-between items-center mb-2 px-2">
+              <h3 className="text-sm font-medium">Connect with me</h3>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-6 w-6" 
+                onClick={onClose}
+              >
+                <X className="h-3.5 w-3.5" />
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-4 gap-2 justify-center mt-2 p-1">
+              {socialItems.map((item, i) => (
+                <motion.a
+                  key={item.label}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-1.5 py-1.5 px-1 rounded-md"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.05, duration: 0.15 }}
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(var(--primary), 0.1)" }}
+                >
+                  <div className={`${styles.circleSize} rounded-full bg-primary/10 flex items-center justify-center text-primary`}>
+                    {item.icon}
+                  </div>
+                  <span className={styles.labelSize}>{item.label}</span>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  };
+
   return (
     <>
       {/* Desktop Navigation */}
@@ -136,80 +223,56 @@ const Navbar = () => {
       >
         {/* Logo/Avatar area - adjusted for better small screen support */}
         <div className="w-auto sm:w-1/3 flex items-center">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex space-x-2 sm:space-x-3 items-center group"
-          >
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="p-0 h-auto w-auto rounded-full"
-                >
-                  <Avatar className="h-9 w-9 ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md cursor-pointer">
+          <div className="relative">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex space-x-2 sm:space-x-3 items-center group"
+            >
+              {/* Replace DropdownMenu with custom connect panel */}
+              <Button
+                variant="ghost"
+                className="p-0 h-auto w-auto rounded-full relative"
+                onClick={() => setShowDesktopSocial(!showDesktopSocial)}
+              >
+                <div className="relative">
+                  {/* Pinging animation */}
+                  <span className="absolute inset-0 rounded-full animate-ping bg-primary/30 opacity-75"/>
+                  
+                  <Avatar className="h-9 w-9 ring-2 ring-primary/40 transition-all shadow-md">
                     <AvatarImage src={`${github}.png`} alt="Profile" />
                     <AvatarFallback>
                       <span className="text-xs">{initials}</span>
                     </AvatarFallback>
                   </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-56">
-                <DropdownMenuLabel>Connect with me</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                  <a
-                    className="flex items-center w-full"
-                    target="_blank"
-                    href={github}
-                    rel="noopener noreferrer"
-                  >
-                    <Github className="mr-2 h-4 w-4" />
-                    <span>GitHub</span>
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                  <a
-                    className="flex items-center w-full"
-                    target="_blank"
-                    href={twitter}
-                    rel="noopener noreferrer"
-                  >
-                    <Twitter className="mr-2 h-4 w-4" />
-                    <span>Twitter</span>
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                  <a
-                    className="flex items-center w-full"
-                    target="_blank"
-                    href={linkedin}
-                    rel="noopener noreferrer"
-                  >
-                    <LinkedinIcon className="mr-2 h-4 w-4" />
-                    <span>LinkedIn</span>
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
-                  <a
-                    className="flex items-center w-full"
-                    target="_blank"
-                    href={resume}
-                    rel="noopener noreferrer"
-                  >
-                    <File className="mr-2 h-4 w-4" />
-                    <span>Resume</span>
-                  </a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <motion.h3
-              className="font-medium text-sm sm:text-base flex items-center group-hover:text-primary transition-colors duration-300 cursor-pointer"
-              whileHover={{ color: "hsl(var(--primary))" }}
-            >
-              {name}
-            </motion.h3>
-          </motion.div>
+                  
+                  {/* Small notification badge */}
+                  <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-primary rounded-full flex items-center justify-center">
+                    <span className="text-[9px] text-white font-bold">+</span>
+                  </span>
+                </div>
+              </Button>
+
+              <div className="flex flex-col">
+                <motion.h3
+                  className="font-medium text-sm sm:text-base flex items-center group-hover:text-primary transition-colors duration-300"
+                >
+                  {name}
+                </motion.h3>
+                <span className="text-xs text-primary/90 flex items-center gap-2">
+                  <MoveLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+                  Tap to connect
+                </span>
+              </div>
+            </motion.div>
+            
+            {/* Use reusable SocialPanel component */}
+            <SocialPanel 
+              isVisible={showDesktopSocial} 
+              onClose={() => setShowDesktopSocial(false)} 
+              variant="desktop" 
+              links={{ github, twitter, linkedin, resume }} 
+            />
+          </div>
         </div>
 
         {/* Navigation Links - improved responsive spacing */}
@@ -298,12 +361,36 @@ const Navbar = () => {
       >
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src={`${github}.png`} alt="Profile" />
-              <AvatarFallback>SK</AvatarFallback>
-            </Avatar>
-            <span className="font-medium text-sm">{name}</span>
+            <div className="relative">
+              {/* Pinging effect */}
+              <span className="absolute inset-0 rounded-full animate-ping bg-primary/30 opacity-75"/>
+              
+              <Button
+                variant="ghost"
+                className="p-0 h-auto w-auto rounded-full"
+                onClick={() => setShowMobileSocial(!showMobileSocial)}
+              >
+                <Avatar className="h-8 w-8 ring-2 ring-primary/40">
+                  <AvatarImage src={`${github}.png`} alt="Profile" />
+                  <AvatarFallback>{initials}</AvatarFallback>
+                </Avatar>
+                
+                {/* Small notification badge */}
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full flex items-center justify-center">
+                  <span className="text-[8px] text-white font-bold">+</span>
+                </span>
+              </Button>
+            </div>
+            
+            <div className="flex flex-col">
+              <span className="font-medium text-sm">{name}</span>
+              <span className="text-[11px] text-primary/90 flex items-center gap-2">
+                <MoveLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+                Tap to connect
+              </span>
+            </div>
           </div>
+          
           <div className="flex items-center space-x-1">
             <Button
               variant="ghost"
@@ -417,6 +504,14 @@ const Navbar = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Social panel for mobile */}
+        <SocialPanel 
+          isVisible={showMobileSocial} 
+          onClose={() => setShowMobileSocial(false)} 
+          variant="mobile" 
+          links={{ github, twitter, linkedin, resume }} 
+        />
       </nav>
     </>
   );

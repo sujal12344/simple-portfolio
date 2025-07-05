@@ -178,11 +178,11 @@ export const PersonalData = {
   },
   tech_stack: {
     name: "Tech Stack",
-    items: ["Next.js", "TypeScript", "PostgreSQL", "MERN"],
+    items: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
   },
   dev_tools: {
     name: "Dev Tools",
-    items: ["Docker", "Prisma-ORM", "Vercel AI SDK", "Git"],
+    items: ["Docker", "AWS" , "Vercel AI SDK", "Stripe", "Git"],
   }
 };
 

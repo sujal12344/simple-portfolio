@@ -139,7 +139,7 @@ const Herobody = () => {
               )}
             </div>
           </motion.div>
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.5 }}
@@ -168,7 +168,7 @@ const Herobody = () => {
                 )
               )}
             </div>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
 
         {/* Right Image Section - Made responsive with better sizing */}
