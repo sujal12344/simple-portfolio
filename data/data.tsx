@@ -1,6 +1,8 @@
 import { Code, Gamepad, Terminal } from "lucide-react";
+import { Metadata } from "next";
+import { HeaderItem, HeaderName, ProjectType } from "./data_types";
 
-export const ProjectData = [
+export const ProjectData: ProjectType[] = [
   {
     id: 1,
     title: "Socially",
@@ -43,7 +45,7 @@ export const ProjectData = [
   },
 ];
 
-export const experiences = [
+export const Experiences = [
   {
     title: "Frontend Developer",
     company: "Neotix Lab Private Limited",
@@ -137,7 +139,7 @@ export const experiences = [
   },
 ];
 
-export const skillsData = {
+export const SkillsData = {
   frontend: [
     { name: "NextJS", level: 85 },
     { name: "React", level: 90 },
@@ -153,8 +155,8 @@ export const skillsData = {
     { name: "MongoDB", level: 80 },
   ],
   other: [
-    { name: "Git", level: 90 },
     { name: "Docker", level: 75 },
+    { name: "Git", level: 90 },
     { name: "Stripe", level: 70 },
     // { name: "VectorDB", level: 65 },
     // { name: "Langchain", level: 70 },
@@ -162,8 +164,11 @@ export const skillsData = {
   ],
 };
 
-export const personalData = {
+export const PersonalData = {
   name: "Sujal Kesharwani",
+  role: "Fullstack Developer",
+  greet: "Welcome to my portfolio",
+  greetIcon: "👋",
   bio: "Hi, I'm Sujal Kesharwani, a full stack developer with experience in building scalable web apps using modern industry technologies. I'm always curious and excited to explore new things.",
   links: {
     github: "https://github.com/sujal12344",
@@ -171,4 +176,120 @@ export const personalData = {
     linkedin: "https://www.linkedin.com/in/sujal-kesharwani-518798368/",
     resume: "https://childish.tiiny.site/",
   },
+  tech_stack: {
+    name: "Tech Stack",
+    items: ["Next.js", "TypeScript", "PostgreSQL", "MERN"],
+  },
+  dev_tools: {
+    name: "Dev Tools",
+    items: ["Docker", "Prisma-ORM", "Vercel AI SDK", "Git"],
+  }
 };
+
+export const MetaData: Metadata = {
+  title: "Sujal's Portfolio",
+  icons: {
+    icon: "/images/childish.png",
+    shortcut: "/images/childish.png",
+    apple: "/images/childish.png",
+  },
+  description: "Portfolio of Sujal, A full stack developer and a curious mind",
+  keywords: [
+    "Sujal Kesharwani",
+    "Full Stack Developer",
+    "Portfolio",
+    "Web Development",
+    "Next.js",
+    "React",
+    "TypeScript",
+  ],
+  openGraph: {
+    title: "Sujal's Portfolio",
+    description:
+      "Portfolio of Sujal, A full stack developer and a curious mind",
+    url: "https://sujal-portfolio.vercel.app/",
+    siteName: "Sujal's Portfolio",
+    images: [
+      {
+        url: "/images/childish.png",
+        width: 800,
+        height: 600,
+        alt: "Sujal's Portfolio",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sujal's Portfolio",
+    description:
+      "Portfolio of Sujal, A full stack developer and a curious mind",
+    images: ["/images/childish.png"],
+    creator: "@Sujalkeshar220",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const NavLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
+];
+
+const getBg = (name: HeaderName): string => "<" + name + ">";
+const getBgClosing = (name: HeaderName): string => "</" + name + ">";
+
+export const Headers: HeaderItem[] = [
+  {
+    name: "about",
+    number: "01",
+    title: "About Me",
+    subtitle: "Get to know me",
+    description: "A passionate developer with a curiosity for new technologies",
+    background: getBg("about"),
+    backgroundClosing: getBgClosing("about"),
+  },
+  {
+    name: "skills",
+    number: "02",
+    title: "Skills & Expertise",
+    subtitle: "Technical Proficiency",
+    description: "In the middle of difficulty lies opportunity. Explore my web of skills and technologies.",
+    background: getBg("skills"),
+    backgroundClosing: getBgClosing("skills"),
+  },
+  {
+    name: "experience",
+    number: "03",
+    title: "Work Experience",
+    subtitle: "My Coding Journey",
+    description: "Staying with the problems long enough — not just intelligent, but persistent.",
+    background: getBg("experience"),
+    backgroundClosing: getBgClosing("experience"),
+  },
+  {
+    name: "projects",
+    number: "04",
+    title: "Featured Projects",
+    subtitle: "Problems and Paradigms",
+    description:"Weaving the web, one solution at a time. Explore my technical projects that solve real-world problems.",
+    background: getBg("projects"),
+    backgroundClosing: getBgClosing("projects"),
+  },
+  {
+    name: "contact",
+    number: "05",
+    title: "Get In Touch",
+    subtitle: "Let's Build Something Amazing Together",
+    description: "Have a project in mind or just want to connect? Reach out and let's start a conversation.",
+    background: getBg("contact"),
+    backgroundClosing: getBgClosing("contact"),
+  },
+];

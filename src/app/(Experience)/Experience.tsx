@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Calendar, ChevronRight, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
-import { experiences, personalData } from "../../../data/data";
+import { Experiences, Headers, PersonalData } from "../../../data/data";
 
 // Custom hook for responsive design
 const useResponsiveLayout = () => {
@@ -291,7 +291,7 @@ const AnimatedTimeline = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
 };
 
 // Main component
-const Experience = () => {
+const ExperienceSection = () => {
   const containerRef = useRef(null);
   const { isSmallScreen, isMobileScreen } = useResponsiveLayout();
 
@@ -305,20 +305,22 @@ const Experience = () => {
 
   const {
     links: { github },
-  } = personalData;
+  } = PersonalData;
+
+  const experiencesHeader = Headers.find(header => header.name === "experience")!
 
   return (
     <div
       className="overflow-hidden py-10 xs:py-12 sm:py-16 md:py-20 relative bg-background"
       ref={containerRef}
-      id="experience"
+      id={experiencesHeader.name}
     >
       {/* Background elements */}
       <div className="absolute top-10 xs:top-12 sm:top-16 md:top-20 left-0 opacity-5 text-lg xs:text-xl sm:text-3xl md:text-5xl lg:text-6xl font-mono">
-        {"<experience>"}
+        {experiencesHeader.background}
       </div>
       <div className="absolute bottom-10 xs:bottom-12 sm:bottom-16 md:bottom-20 right-0 opacity-5 text-lg xs:text-xl sm:text-3xl md:text-5xl lg:text-6xl font-mono">
-        {"</experience>"}
+        {experiencesHeader.backgroundClosing}
       </div>
 
       <div className="max-w-7xl mx-auto px-2 xs:px-3 sm:px-6 lg:px-8">
@@ -339,7 +341,7 @@ const Experience = () => {
               }}
               className="text-primary font-mono text-xs xs:text-sm px-2 xs:px-3 py-0.5 xs:py-1 rounded-full bg-primary/10 border border-primary/20"
             >
-              03. <span className="text-foreground">Work Experience</span>
+              {experiencesHeader.number}.{" "}<span className="text-foreground">{experiencesHeader.title}</span>
             </motion.span>
             <div className="h-px w-3 xs:w-5 bg-primary" />
           </div>
@@ -351,7 +353,7 @@ const Experience = () => {
             viewport={{ once: true }}
             className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-2 xs:mb-4 tracking-tight"
           >
-            My Coding Journey
+            {experiencesHeader.subtitle}
           </motion.h1>
 
           <motion.p
@@ -361,8 +363,7 @@ const Experience = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center max-w-2xl mx-auto text-sm xs:text-base sm:text-lg"
           >
-            Staying with the problems long enough — not just intelligent, but
-            persistent.
+            {experiencesHeader.description}
           </motion.p>
         </motion.div>
 
@@ -374,7 +375,7 @@ const Experience = () => {
         >
           <AnimatedTimeline isSmallScreen={isSmallScreen} />
 
-          {experiences.map((exp, index) => (
+          {Experiences.map((exp, index) => (
             <React.Fragment key={index}>
               <ExperienceCard
                 {...exp}
@@ -431,4 +432,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default ExperienceSection;

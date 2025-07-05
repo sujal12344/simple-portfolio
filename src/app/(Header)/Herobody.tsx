@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { LeafyGreen, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { personalData } from "../../../data/data";
+import { PersonalData } from "../../../data/data";
 
 const Herobody = () => {
-  const { name, bio } = personalData;
+  const { name, bio, greet, greetIcon, role, tech_stack, dev_tools } = PersonalData;
   return (
     <div className="overflow-x-hidden">
       <div
@@ -38,7 +38,7 @@ const Herobody = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-primary" />
                 </span>
-                Welcome to my portfolio
+                {greet}
               </span>
             </motion.div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 tracking-tight">
@@ -48,13 +48,13 @@ const Herobody = () => {
                 aria-label="waving hand"
                 className="inline-block animate-wave ml-2"
               >
-                👋
+                {greetIcon}
               </span>
             </h1>
             <div className="flex items-center space-x-3 mb-3">
               <div className="h-0.5 w-8 sm:w-12 bg-primary rounded-full" />
               <h2 className="text-lg sm:text-xl text-muted-foreground font-medium">
-                Fullstack Developer
+                {role}
               </h2>
             </div>
           </motion.div>
@@ -115,12 +115,42 @@ const Herobody = () => {
             className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mt-2"
           >
             <p className="text-base sm:text-lg text-muted-foreground underline font-medium underline-offset-8">
-              Tech Stack
+              {tech_stack.name}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {["Next.js", "TypeScript", "PostgreSQL", "Prisma"].map(
+              {tech_stack.items.map(
                 (tech, i) => (
                   <motion.span
+                    key={tech}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
+                    className="px-2 py-1 rounded-md bg-secondary text-sm font-medium hover:bg-primary/10 transition-colors duration-200 cursor-pointer"
+                    onClick={() => {
+                      window.open(
+                        `https://www.google.com/search?q=${tech}`,
+                        "_blank"
+                      );
+                    }}
+                  >
+                    {tech}
+                  </motion.span>
+                )
+              )}
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9, duration: 0.5 }}
+            className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mt-2"
+          >
+            <p className="text-base sm:text-lg text-muted-foreground underline font-medium underline-offset-8">
+              {dev_tools.name}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {dev_tools.items.map((tech, i) => (
+                <motion.span
                     key={tech}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}

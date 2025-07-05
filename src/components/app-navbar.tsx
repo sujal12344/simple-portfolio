@@ -19,11 +19,13 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { personalData } from "../../data/data";
+import { PersonalData } from "../../data/data";
 
 const AppNavbar = () => {
   const theme = useTheme();
-  const {links:{github, linkedin, resume, twitter}} = personalData
+  const {
+    links: { github, linkedin, resume, twitter },
+  } = PersonalData;
   return (
     <>
       <div className="md:hidden  w-full fixed bottom-0 z-10">

@@ -1,7 +1,7 @@
 "use client";
 import { motion, useAnimation, useInView } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
-import { personalData, ProjectData } from "../../../data/data";
+import { PersonalData, ProjectData, Headers } from "../../../data/data";
 import {
   ArrowRight,
   Code,
@@ -13,23 +13,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-
-// Define the project structure for TypeScript
-interface ProjectType {
-  id: number;
-  title: string;
-  description: string;
-  github: string;
-  ImageUrl: string;
-  websiteUrl: string;
-  color: string;
-  categories?: string[];
-  technologies?: string[];
-  isFeatured?: boolean;
-}
+import { ProjectType } from "../../../data/data_types";
 
 // TypeScript assertion to ensure proper type for ProjectData
-const typedProjectData = ProjectData as ProjectType[];
+const typedProjectData = ProjectData;
 
 // Extract unique categories from project data
 const allCategories = Array.from(
@@ -38,7 +25,9 @@ const allCategories = Array.from(
   )
 );
 
-const Project = () => {
+const ProjectsSection = () => {
+  const projectHeader = Headers.find((header) => header.name === "projects")!;
+
   const [activeCategory, setActiveCategory] = useState("Other");
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -80,18 +69,21 @@ const Project = () => {
 
   const {
     links: { github },
-  } = personalData;
+  } = PersonalData;
 
   return (
-    <div className="relative py-20 overflow-hidden bg-background" id="projects">
+    <div
+      className="relative py-20 overflow-hidden bg-background"
+      id={projectHeader.name}
+    >
       {/* Background elements */}
       <div className="absolute top-20 left-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
-        {"<projects>"}
+        {projectHeader.background}
       </div>
       <div className="absolute bottom-20 right-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
-        {"</projects>"}
+        {projectHeader.backgroundClosing}
       </div>
-      <div className="absolute inset-0 bg-grid-small-white/[0.025] -z-10" />
+      {/* <div className="absolute inset-0 bg-grid-small-white/[0.025] -z-10" /> */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
@@ -111,7 +103,8 @@ const Project = () => {
               }}
               className="text-primary font-mono text-sm px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
             >
-              04. <span className="text-foreground">Featured Projects</span>
+              {projectHeader.number}.{" "}
+              <span className="text-foreground">{projectHeader.title}</span>
             </motion.span>
             <div className="h-px w-5 bg-primary" />
           </div>
@@ -123,7 +116,7 @@ const Project = () => {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 tracking-tight"
           >
-            Problems and Paradigms
+            {projectHeader.subtitle}
           </motion.h1>
 
           <motion.p
@@ -133,8 +126,7 @@ const Project = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center max-w-2xl mx-auto text-lg"
           >
-            Weaving the web, one solution at a time. Explore my technical
-            projects that solve real-world problems.
+            {projectHeader.description}
           </motion.p>
         </motion.div>
 
@@ -149,16 +141,7 @@ const Project = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {featuredProjects.map(
               (
-                project: {
-                  id: number;
-                  title: string;
-                  description: string;
-                  github: string;
-                  ImageUrl: string;
-                  websiteUrl: string;
-                  color: string;
-                  categories?: string[];
-                },
+                project: ProjectType,
                 index: number
               ) => (
                 <motion.div
@@ -461,4 +444,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default ProjectsSection;

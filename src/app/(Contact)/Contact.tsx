@@ -14,9 +14,9 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
-import { personalData } from "../../../data/data";
+import { Headers, PersonalData } from "../../../data/data";
 
-const Contact = () => {
+const ContactSection = () => {
   const [formStatus, setFormStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -96,19 +96,21 @@ const Contact = () => {
   };
   const {
     links: { github, linkedin, twitter, resume },
-  } = personalData;
+  } = PersonalData;
+
+  const contactHeader = Headers.find(h => h.name === "contact")!
 
   return (
     <div
       className="relative py-12 sm:py-16 md:py-20 overflow-hidden bg-background"
-      id="contact"
+      id={contactHeader.name}
     >
       {/* Background elements - Adjusted for better mobile display */}
       <div className="absolute top-10 sm:top-20 left-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
-        {"<contact>"}
+        {contactHeader.background}
       </div>
       <div className="absolute bottom-10 sm:bottom-20 right-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
-        {"</contact>"}
+        {contactHeader.backgroundClosing}
       </div>
       <div className="absolute inset-0 bg-grid-small-white/[0.025] -z-10" />
 
@@ -130,7 +132,7 @@ const Contact = () => {
               }}
               className="text-primary font-mono text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
             >
-              05. <span className="text-foreground">Get In Touch</span>
+              {contactHeader.number}.{" "}<span className="text-foreground">{contactHeader.title}</span>
             </motion.span>
             <div className="h-px w-5 bg-primary" />
           </div>
@@ -142,7 +144,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-3 sm:mb-4 tracking-tight px-2"
           >
-            Let&apos;s Build Something Amazing Together
+            {contactHeader.subtitle}
           </motion.h1>
 
           <motion.p
@@ -152,8 +154,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-2"
           >
-            Have a project in mind or just want to connect? Reach out and let's
-            start a conversation.
+            {contactHeader.description}
           </motion.p>
         </motion.div>
 
@@ -470,4 +471,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactSection;

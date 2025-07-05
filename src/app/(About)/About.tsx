@@ -66,7 +66,7 @@ const About = () => {
             className="text-muted-foreground text-center max-w-2xl mx-auto text-lg"
           >
             I build full-stack applications with modern technologies, focusing
-            on clean code, performance, and exceptional user experiences.
+            on clean code, performance, and exceptional user Experiences.
           </motion.p>
         </motion.div>
 

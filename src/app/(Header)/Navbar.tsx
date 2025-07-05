@@ -22,7 +22,7 @@ import {
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { personalData } from "../../../data/data";
+import { NavLinks, PersonalData } from "../../../data/data";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -42,15 +42,7 @@ const Navbar = () => {
       // Don't detect sections if we're in manual navigation mode
       if (isManualNavigation.current) return;
 
-      // Determine active section based on scroll position
-      const sections = [
-        "home",
-        "about",
-        "skills",
-        "experience",
-        "projects",
-        "contact",
-      ];
+      const sections = NavLinks.map(link => link.name.toLowerCase());
 
       // Find the section that is currently most visible in the viewport
       let maxVisibleSection = "";
@@ -125,19 +117,12 @@ const Navbar = () => {
     }, 1000); // Wait 1 second after clicking before resuming scroll detection
   };
 
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-  ];
-
   const {
     name,
     links: { twitter, github, linkedin, resume },
-  } = personalData;
+  } = PersonalData;
+
+  const initials = name.split(' ').map(n => n[0]).join('');
 
   return (
     <>
@@ -164,7 +149,7 @@ const Navbar = () => {
                   <Avatar className="h-9 w-9 ring-2 ring-primary/20 transition-all hover:ring-primary/70 shadow-md cursor-pointer">
                     <AvatarImage src={`${github}.png`} alt="Profile" />
                     <AvatarFallback>
-                      <span className="text-xs">SK</span>
+                      <span className="text-xs">{initials}</span>
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -229,7 +214,7 @@ const Navbar = () => {
 
         {/* Navigation Links - improved responsive spacing */}
         <ul className="flex flex-grow justify-center items-center space-x-2 sm:space-x-4 md:space-x-6">
-          {navLinks.map((link) => (
+          {NavLinks.map((link) => (
             <motion.li
               key={link.name}
               initial={{ opacity: 0.8 }}
@@ -359,7 +344,7 @@ const Navbar = () => {
               className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg shadow-lg border-t border-primary/10 rounded-b-lg overflow-hidden"
             >
               <ul className="py-2">
-                {navLinks.map((link) => (
+                {NavLinks.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}

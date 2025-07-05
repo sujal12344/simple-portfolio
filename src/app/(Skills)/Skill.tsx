@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { Code, Braces, Server, Cpu } from "lucide-react";
-import { skillsData } from "../../../data/data";
+import { Headers, SkillsData } from "../../../data/data";
 
 // Define types for skills and categories
 type SkillCategory = "frontend" | "backend" | "other";
@@ -175,21 +175,21 @@ const calculateDesktopPositions = (totalSkills: number) => {
   return positions;
 };
 
-const Skill = () => {
+const SkillSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const isMobile = useMobileDetect();
 
   // Flatten skills for the display
   const allSkills: Array<Skill> = [
-    ...skillsData.frontend.map((s) => ({
+    ...SkillsData.frontend.map((s) => ({
       ...s,
       category: "frontend" as SkillCategory,
     })),
-    ...skillsData.backend.map((s) => ({
+    ...SkillsData.backend.map((s) => ({
       ...s,
       category: "backend" as SkillCategory,
     })),
-    ...skillsData.other.map((s) => ({
+    ...SkillsData.other.map((s) => ({
       ...s,
       category: "other" as SkillCategory,
     })),
@@ -204,17 +204,19 @@ const Skill = () => {
       ? allSkills
       : allSkills.filter((skill) => skill.category === activeCategory);
 
+  const skillsHeader = Headers.find((h) => h.name === "skills")!
+
   return (
     <div
-      id="skills"
+      id={skillsHeader.name}
       className="overflow-x-hidden py-10 sm:py-16 md:py-20 relative"
     >
       {/* Background elements */}
       <div className="absolute top-6 sm:top-10 md:top-20 left-0 opacity-5 text-xl sm:text-3xl md:text-5xl lg:text-6xl font-mono">
-        {"<skills>"}
+        {skillsHeader.background}
       </div>
       <div className="absolute bottom-6 sm:bottom-10 md:bottom-20 right-0 opacity-5 text-xl sm:text-3xl md:text-5xl lg:text-6xl font-mono">
-        {"</skills>"}
+        {skillsHeader.backgroundClosing}
       </div>
       <div className="absolute inset-0 bg-grid-small-white/[0.025] -z-10" />
 
@@ -236,7 +238,7 @@ const Skill = () => {
               }}
               className="text-primary font-mono text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-primary/10 border border-primary/20"
             >
-              02. <span className="text-foreground">Skills & Expertise</span>
+              {skillsHeader.number}.{" "}<span className="text-foreground">{skillsHeader.title}</span>
             </motion.span>
             <div className="h-px w-3 sm:w-5 bg-primary" />
           </div>
@@ -248,7 +250,7 @@ const Skill = () => {
             viewport={{ once: true }}
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-2 sm:mb-4 tracking-tight"
           >
-            Technical Proficiency
+            {skillsHeader.subtitle}
           </motion.h1>
 
           <motion.p
@@ -258,8 +260,7 @@ const Skill = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center max-w-2xl mx-auto text-sm sm:text-base md:text-lg"
           >
-            In the middle of difficulty lies opportunity. Explore my web of
-            skills and technologies.
+            {skillsHeader.description}
           </motion.p>
         </motion.div>
 
@@ -409,14 +410,14 @@ const Skill = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
             {(activeCategory === "all"
               ? [
-                  ...skillsData.frontend.slice(0, 3),
-                  ...skillsData.backend.slice(0, 2),
+                  ...SkillsData.frontend.slice(0, 3),
+                  ...SkillsData.backend.slice(0, 2),
                 ]
               : activeCategory === "frontend"
-              ? skillsData.frontend
+              ? SkillsData.frontend
               : activeCategory === "backend"
-              ? skillsData.backend
-              : skillsData.other
+              ? SkillsData.backend
+              : SkillsData.other
             ).map((skill, index) => (
               <motion.div
                 key={skill.name}
@@ -467,4 +468,4 @@ const Skill = () => {
   );
 };
 
-export default Skill;
+export default SkillSection;
