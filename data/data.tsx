@@ -144,6 +144,7 @@ export const SkillsData = {
     { name: "NextJS", level: 85 },
     { name: "React", level: 90 },
     { name: "Typescript", level: 80 },
+    { name: "ShadCn", level: 85 },
     { name: "Tailwind", level: 90 },
   ],
   backend: [
@@ -156,8 +157,8 @@ export const SkillsData = {
   ],
   other: [
     { name: "Docker", level: 75 },
-    { name: "Git", level: 90 },
     { name: "Stripe", level: 70 },
+    { name: "Git", level: 90 },
     // { name: "VectorDB", level: 65 },
     // { name: "Langchain", level: 70 },
     // { name: "S3", level: 75 },
@@ -175,6 +176,7 @@ export const PersonalData = {
     twitter: "https://twitter.com/Sujalkeshar220",
     linkedin: "https://www.linkedin.com/in/sujal-kesharwani-518798368/",
     resume: "https://childish.tiiny.site/",
+    linktree: "https://linktr.ee/childishhh",
   },
   tech_stack: {
     name: "Tech Stack",
@@ -203,31 +205,31 @@ export const MetaData: Metadata = {
     "React",
     "TypeScript",
   ],
-  openGraph: {
-    title: "Sujal's Portfolio",
-    description:
-      "Portfolio of Sujal, A full stack developer and a curious mind",
-    url: "https://sujal-portfolio.vercel.app/",
-    siteName: "Sujal's Portfolio",
-    images: [
-      {
-        url: "/images/childish.png",
-        width: 800,
-        height: 600,
-        alt: "Sujal's Portfolio",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sujal's Portfolio",
-    description:
-      "Portfolio of Sujal, A full stack developer and a curious mind",
-    images: ["/images/childish.png"],
-    creator: "@Sujalkeshar220",
-  },
+  // openGraph: {
+  //   title: "Sujal's Portfolio",
+  //   description:
+  //     "Portfolio of Sujal, A full stack developer and a curious mind",
+  //   url: "https://sujal-portfolio.vercel.app/",
+  //   siteName: "Sujal's Portfolio",
+  //   images: [
+  //     {
+  //       url: "/images/childish.png",
+  //       width: 800,
+  //       height: 600,
+  //       alt: "Sujal's Portfolio",
+  //     },
+  //   ],
+  //   locale: "en_US",
+  //   type: "website",
+  // },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "Sujal's Portfolio",
+  //   description:
+  //     "Portfolio of Sujal, A full stack developer and a curious mind",
+  //   images: ["/images/childish.png"],
+  //   creator: "@Sujalkeshar220",
+  // },
   robots: {
     index: true,
     follow: true,
