@@ -5,8 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -20,10 +18,12 @@ import {
   Sun,
   MoveLeft,
 } from "lucide-react";
+import { PiLinktreeLogoBold } from "react-icons/pi";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLinks, PersonalData } from "../../../data/data";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -122,7 +122,7 @@ const Navbar = () => {
 
   const {
     name,
-    links: { twitter, github, linkedin, resume },
+    links: { twitter, github, linkedin, resume, linktree },
   } = PersonalData;
 
   const initials = name.split(' ').map(n => n[0]).join('');
@@ -133,7 +133,8 @@ const Navbar = () => {
     isVisible, 
     onClose, 
     variant = "desktop",
-    links 
+    links,
+    panelRef
   }: { 
     isVisible: boolean; 
     onClose: () => void; 
@@ -143,37 +144,41 @@ const Navbar = () => {
       twitter: string; 
       linkedin: string; 
       resume: string; 
-    }; 
+      linktree: string;
+    };
+    panelRef: React.RefObject<HTMLDivElement>;
   }) => {
     // Adjust styling based on variant
     const styles = useMemo(() => ({
       container: variant === "desktop"
-        ? "absolute top-12 left-0 w-[280px] z-50"
+        ? "absolute top-12 left-0 w-max z-50"
         : "mt-2",
-      iconSize: variant === "desktop" ? "h-4 w-4" : "h-3.5 w-3.5",
-      circleSize: variant === "desktop" ? "w-9 h-9" : "w-8 h-8",
-      labelSize: variant === "desktop" ? "text-[10px] mt-1" : "text-[9px] mt-0.5",
+      iconSize: variant === "desktop" ? "h-5.5 w-5.5" : "h-5 w-5",
+      circleSize: variant === "desktop" ? "w-11 h-11" : "w-10 h-10",
+      labelSize: variant === "desktop" ? "text-[11px] mt-1" : "text-[10px] mt-0.5",
       animation: variant === "desktop"
         ? { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: 5 } }
         : { initial: { opacity: 0, height: 0 }, animate: { opacity: 1, height: "auto" }, exit: { opacity: 0, height: 0 } }
     }), [variant]);
 
     const socialItems = [
-      { icon: <Github className={styles.iconSize} />, label: "GitHub", url: links.github },
-      { icon: <Twitter className={styles.iconSize} />, label: "Twitter", url: links.twitter },
-      { icon: <LinkedinIcon className={styles.iconSize} />, label: "LinkedIn", url: links.linkedin },
-      { icon: <File className={styles.iconSize} />, label: "Resume", url: links.resume }
+      { icon: Github, label: "GitHub", url: links.github },
+      { icon: Twitter, label: "Twitter", url: links.twitter },
+      { icon: LinkedinIcon, label: "LinkedIn", url: links.linkedin },
+      { icon: File, label: "Resume", url: links.resume },
+      { icon: PiLinktreeLogoBold, label: "Links", url: links.linktree },
     ];
 
     return (
       <AnimatePresence>
         {isVisible && (
           <motion.div
+            ref={panelRef}
             {...styles.animation}
             transition={{ duration: 0.2 }}
-            className={`bg-background/95 backdrop-blur-md border border-primary/10 rounded-lg shadow-lg p-2 ${styles.container}`}
+            className={`bg-background/95 backdrop-blur-md border border-primary/30 rounded-lg shadow-lg p-2 ${styles.container}`}
           >
-            <div className="flex justify-between items-center mb-2 px-2">
+            <div className="flex justify-between items-center px-2">
               <h3 className="text-sm font-medium">Connect with me</h3>
               <Button 
                 variant="ghost" 
@@ -185,7 +190,7 @@ const Navbar = () => {
               </Button>
             </div>
             
-            <div className="grid grid-cols-4 gap-2 justify-center mt-2 p-1">
+            <div className="grid grid-cols-5 gap-2 justify-center mt-2 p-1">
               {socialItems.map((item, i) => (
                 <motion.a
                   key={item.label}
@@ -199,7 +204,7 @@ const Navbar = () => {
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(var(--primary), 0.1)" }}
                 >
                   <div className={`${styles.circleSize} rounded-full bg-primary/10 flex items-center justify-center text-primary`}>
-                    {item.icon}
+                    {<item.icon className={cn(item.icon === PiLinktreeLogoBold ? (variant === "desktop" ? "h-7 w-7" : "h-6 w-6") : styles.iconSize)} />}
                   </div>
                   <span className={styles.labelSize}>{item.label}</span>
                 </motion.a>
@@ -210,6 +215,55 @@ const Navbar = () => {
       </AnimatePresence>
     );
   };
+
+  // Effect to handle clicks outside the panel and scrolling
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      // For desktop panel
+      if (showDesktopSocial && 
+          desktopPanelRef.current && 
+          !desktopPanelRef.current.contains(e.target as Node) &&
+          avatarDesktopRef.current && 
+          !avatarDesktopRef.current.contains(e.target as Node)) {
+        setShowDesktopSocial(false);
+      }
+      
+      // For mobile panel
+      if (showMobileSocial && 
+          mobilePanelRef.current && 
+          !mobilePanelRef.current.contains(e.target as Node) &&
+          avatarMobileRef.current && 
+          !avatarMobileRef.current.contains(e.target as Node)) {
+        setShowMobileSocial(false);
+      }
+    };
+    
+    // Close panels on scroll
+    const handleScroll = () => {
+      if (showDesktopSocial) {
+        setShowDesktopSocial(false);
+      }
+      if (showMobileSocial) {
+        setShowMobileSocial(false);
+      }
+    };
+    
+    // Add event listeners
+    document.addEventListener('mousedown', handleOutsideClick);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Cleanup event listeners
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [showDesktopSocial, showMobileSocial]);
+
+  // Refs for the panels
+  const desktopPanelRef = useRef<HTMLDivElement>(null);
+  const mobilePanelRef = useRef<HTMLDivElement>(null);
+  const avatarDesktopRef = useRef<HTMLButtonElement>(null);
+  const avatarMobileRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>
@@ -230,6 +284,7 @@ const Navbar = () => {
             >
               {/* Replace DropdownMenu with custom connect panel */}
               <Button
+                ref={avatarDesktopRef}
                 variant="ghost"
                 className="p-0 h-auto w-auto rounded-full relative"
                 onClick={() => setShowDesktopSocial(!showDesktopSocial)}
@@ -270,7 +325,8 @@ const Navbar = () => {
               isVisible={showDesktopSocial} 
               onClose={() => setShowDesktopSocial(false)} 
               variant="desktop" 
-              links={{ github, twitter, linkedin, resume }} 
+              links={{ github, twitter, linkedin, resume, linktree }} 
+              panelRef={desktopPanelRef}
             />
           </div>
         </div>
@@ -366,6 +422,7 @@ const Navbar = () => {
               <span className="absolute inset-0 rounded-full animate-ping bg-primary/30 opacity-75"/>
               
               <Button
+                ref={avatarMobileRef}
                 variant="ghost"
                 className="p-0 h-auto w-auto rounded-full"
                 onClick={() => setShowMobileSocial(!showMobileSocial)}
@@ -510,7 +567,8 @@ const Navbar = () => {
           isVisible={showMobileSocial} 
           onClose={() => setShowMobileSocial(false)} 
           variant="mobile" 
-          links={{ github, twitter, linkedin, resume }} 
+          links={{ github, twitter, linkedin, resume, linktree }} 
+          panelRef={mobilePanelRef}
         />
       </nav>
     </>

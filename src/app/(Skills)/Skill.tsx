@@ -204,7 +204,7 @@ const SkillSection = () => {
       ? allSkills
       : allSkills.filter((skill) => skill.category === activeCategory);
 
-  const skillsHeader = Headers.find((h) => h.name === "skills")!
+  const skillsHeader = Headers.find((h) => h.name === "skills")!;
 
   return (
     <div
@@ -238,7 +238,8 @@ const SkillSection = () => {
               }}
               className="text-primary font-mono text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-primary/10 border border-primary/20"
             >
-              {skillsHeader.number}.{" "}<span className="text-foreground">{skillsHeader.title}</span>
+              {skillsHeader.number}.{" "}
+              <span className="text-foreground">{skillsHeader.title}</span>
             </motion.span>
             <div className="h-px w-3 sm:w-5 bg-primary" />
           </div>
