@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   GithubIcon,
@@ -40,32 +40,136 @@ const ContactSection = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  // Add these states inside your ContactSection component
+  const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null);
+  const [emailValidationMessage, setEmailValidationMessage] = useState("");
+  const [isValidatingEmail, setIsValidatingEmail] = useState(false);
+  const emailTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Add this function to validate email using our API route
+  const validateEmail = async (email: string) => {
+    if (!email || !email.includes("@") || emailRegex.test(email) === false) {
+      setIsEmailValid(false);
+      setEmailValidationMessage("Please enter a valid email address");
+      return;
+    }
+
+    setIsValidatingEmail(true);
+    setEmailValidationMessage("Verifying email...");
+
+    try {
+      const response = await fetch("/api/verify-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Check if the email is valid based on the VerifyRight API response
+      if (data.status === true && data.checks?.smtp === true) {
+        setIsEmailValid(true);
+        setEmailValidationMessage("Email verified!");
+        // Clear message after 2 seconds
+        setTimeout(() => setEmailValidationMessage(""), 2000);
+      } else {
+        setIsEmailValid(false);
+        setEmailValidationMessage("This email address appears to be invalid");
+      }
+    } catch (error) {
+      console.error("Email validation error:", error);
+      setIsEmailValid(null);
+      setEmailValidationMessage("Could not verify email");
+    } finally {
+      setIsValidatingEmail(false);
+    }
+  };
+
+  // Add this function to handle email input with debounce
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+
+    // Update the form state immediately
+    handleInputChange(e);
+
+    // Reset validation states
+    if (isEmailValid !== null) {
+      setIsEmailValid(null);
+      setEmailValidationMessage("");
+    }
+
+    // Clear any existing timeout
+    if (emailTimeoutRef.current) {
+      clearTimeout(emailTimeoutRef.current);
+    }
+
+    // Only validate if email has @ character (basic check before API call)
+    if (email && (email.includes("@") || emailRegex.test(email) === false)) {
+      emailTimeoutRef.current = setTimeout(() => {
+        validateEmail(email);
+      }, 800); // Wait 800ms after typing stops
+    }
+  };
+
+  // Update your handleSubmit function to use our API route
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // If email hasn't been validated yet or is invalid
+    if (formData.email && (isEmailValid === null || isEmailValid === false)) {
+      // Validate email first
+      setFormStatus("loading");
+      await validateEmail(formData.email);
+
+      // If validation failed, don't submit
+      if (!isEmailValid) {
+        setFormStatus("idle");
+        return;
+      }
+    }
+
+    // Continue with form submission
     setFormStatus("loading");
 
     try {
-      // Use the existing FormSubmit.co endpoint
-      const formElement = document.getElementById(
-        "contact-form"
-      ) as HTMLFormElement;
+      // Get all form data
+      const formElement = document.getElementById("contact-form") as HTMLFormElement;
       const formData = new FormData(formElement);
+      const formValues = Object.fromEntries(formData);
 
-      const response = await fetch(
-        "https://formsubmit.co/cc9e32fafc72f282ca8d7e86196eeefb",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      // Use our API route instead of calling FormSubmit directly
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
 
-      if (response.ok) {
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result.success === "true" || result.success === true) {
         setFormStatus("success");
         setFormData({ email: "", name: "", message: "" });
       } else {
+        console.error("Form submission failed:", result);
         setFormStatus("error");
       }
     } catch (error) {
+      console.error("Form submission error:", error);
       setFormStatus("error");
     }
 
@@ -74,6 +178,15 @@ const ContactSection = () => {
       setFormStatus("idle");
     }, 5000);
   };
+
+  // Clean up on component unmount
+  useEffect(() => {
+    return () => {
+      if (emailTimeoutRef.current) {
+        clearTimeout(emailTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Staggered animation variants
   const containerVariants = {
@@ -98,7 +211,9 @@ const ContactSection = () => {
     links: { github, linkedin, twitter, resume },
   } = PersonalData;
 
-  const contactHeader = Headers.find(h => h.name === "contact")!
+  const contactHeader = Headers.find((h) => h.name === "contact")!;
+
+  const autoResponse = "Thank you for contacting Sujal! I've received your message and will get back to you as soon as possible.";
 
   return (
     <div
@@ -132,7 +247,8 @@ const ContactSection = () => {
               }}
               className="text-primary font-mono text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
             >
-              {contactHeader.number}.{" "}<span className="text-foreground">{contactHeader.title}</span>
+              {contactHeader.number}.{" "}
+              <span className="text-foreground">{contactHeader.title}</span>
             </motion.span>
             <div className="h-px w-5 bg-primary" />
           </div>
@@ -331,40 +447,91 @@ const ContactSection = () => {
                   method="POST"
                   onSubmit={handleSubmit}
                   className="space-y-4 sm:space-y-6"
+                  action={`${process.env.NEXT_PUBLIC_FORM_SUBMIT_URL}/${process.env.NEXT_PUBLIC_FORM_SUBMIT_ID}`}
                 >
-                  {/* Hidden input for FormSubmit.co */}
+                  {/* FormSubmit advanced features */}
                   <input type="hidden" name="_captcha" value="false" />
-                  {/* Use the state variable instead of directly accessing window */}
                   <input type="hidden" name="_next" value={currentUrl} />
                   <input
                     type="hidden"
                     name="_subject"
                     value="New contact from portfolio"
                   />
-
+                  <input type="hidden" name="_cc" value={process.env.NEXT_PUBLIC_SECONDARY_EMAIL} />{" "}
+                  {/* Optional: CC another email */}
+                  <input
+                    type="hidden"
+                    name="_autoresponse"
+                    value={autoResponse}
+                  />{" "}
+                  {/* Send automatic response */}
                   {/* Input fields with animated labels - Improved for touch devices */}
                   <motion.div variants={itemVariants} className="group">
-                    <div className="relative border border-primary/20 rounded-lg focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/30 transition-all duration-200 overflow-hidden">
+                    <div
+                      className={`relative border rounded-lg transition-all duration-200 overflow-hidden ${
+                        isEmailValid === false
+                          ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                          : isEmailValid === true
+                          ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                          : "border-primary/20 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/30"
+                      }`}
+                    >
                       <input
                         type="email"
                         name="email"
                         id="email"
                         value={formData.email}
-                        onChange={handleInputChange}
+                        onChange={handleEmailChange} // Use our new handler
                         className="block w-full px-3 sm:px-4 pt-6 pb-2 text-sm sm:text-base bg-transparent appearance-none focus:outline-none peer"
                         placeholder=" "
                         required
                       />
                       <label
                         htmlFor="email"
-                        className="absolute top-2 left-3 sm:left-4 text-xs text-muted-foreground peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm sm:peer-placeholder-shown:text-base transition-all duration-200 peer-focus:top-2 peer-focus:text-xs"
+                        className={`absolute top-2 left-3 sm:left-4 text-xs transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm sm:peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs ${
+                          isEmailValid === false
+                            ? "text-red-500"
+                            : isEmailValid === true
+                            ? "text-green-500"
+                            : "text-muted-foreground"
+                        }`}
                       >
                         Email Address
                       </label>
+
+                      {/* Email validation status icon */}
+                      {formData.email && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                          {isValidatingEmail && (
+                            <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
+                          )}
+                          {!isValidatingEmail && isEmailValid === true && (
+                            <CheckCircle className="h-4 w-4 text-green-500" />
+                          )}
+                          {!isValidatingEmail && isEmailValid === false && (
+                            <AlertCircle className="h-4 w-4 text-red-500" />
+                          )}
+                        </div>
+                      )}
+
                       <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
                     </div>
-                  </motion.div>
 
+                    {/* Show validation message if any */}
+                    {emailValidationMessage && (
+                      <p
+                        className={`mt-1 text-xs ${
+                          isEmailValid === false
+                            ? "text-red-500"
+                            : isEmailValid === true
+                            ? "text-green-500"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {emailValidationMessage}
+                      </p>
+                    )}
+                  </motion.div>
                   <motion.div variants={itemVariants} className="group">
                     <div className="relative border border-primary/20 rounded-lg focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/30 transition-all duration-200 overflow-hidden">
                       <input
@@ -386,7 +553,6 @@ const ContactSection = () => {
                       <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
                     </div>
                   </motion.div>
-
                   <motion.div variants={itemVariants} className="group">
                     <div className="relative border border-primary/20 rounded-lg focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/30 transition-all duration-200 overflow-hidden">
                       <textarea
@@ -408,7 +574,27 @@ const ContactSection = () => {
                       <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
                     </div>
                   </motion.div>
-
+                  {/* Email validation message */}
+                  {emailValidationMessage && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`p-2 sm:p-3 rounded-lg text-xs sm:text-sm flex items-center gap-2 ${
+                        isEmailValid === true
+                          ? "bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300"
+                          : "bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300"
+                      }`}
+                    >
+                      {isValidatingEmail ? (
+                        <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                      ) : isEmailValid === true ? (
+                        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                      ) : (
+                        <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                      )}
+                      <span>{emailValidationMessage}</span>
+                    </motion.div>
+                  )}
                   {/* Form status feedback */}
                   {formStatus === "success" && (
                     <motion.div
@@ -422,7 +608,6 @@ const ContactSection = () => {
                       </span>
                     </motion.div>
                   )}
-
                   {formStatus === "error" && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
@@ -436,7 +621,6 @@ const ContactSection = () => {
                       </span>
                     </motion.div>
                   )}
-
                   {/* Submit button - Improved for touch */}
                   <motion.div variants={itemVariants}>
                     <Button
