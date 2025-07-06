@@ -7,7 +7,8 @@ import Image from "next/image";
 import { PersonalData } from "../../../data/data";
 
 const Herobody = () => {
-  const { name, bio, greet, greetIcon, role, tech_stack, dev_tools } = PersonalData;
+  const { name, bio, greet, greetIcon, role, tech_stack, dev_tools } =
+    PersonalData;
   return (
     <div className="overflow-x-hidden">
       <div
@@ -118,25 +119,23 @@ const Herobody = () => {
               {tech_stack.name}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {tech_stack.items.map(
-                (tech, i) => (
-                  <motion.span
-                    key={tech}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
-                    className="px-2 py-1 rounded-md bg-secondary text-sm font-medium hover:bg-primary/10 transition-colors duration-200 cursor-pointer"
-                    onClick={() => {
-                      window.open(
-                        `https://www.google.com/search?q=${tech}`,
-                        "_blank"
-                      );
-                    }}
-                  >
-                    {tech}
-                  </motion.span>
-                )
-              )}
+              {tech_stack.items.map((tech, i) => (
+                <motion.span
+                  key={tech}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
+                  className="px-2 py-1 rounded-md bg-secondary text-sm font-medium hover:bg-primary/10 transition-colors duration-200 cursor-pointer"
+                  onClick={() => {
+                    window.open(
+                      `https://www.google.com/search?q=${tech}`,
+                      "_blank"
+                    );
+                  }}
+                >
+                  {tech}
+                </motion.span>
+              ))}
             </div>
           </motion.div>
           {/* <motion.div
@@ -182,7 +181,7 @@ const Herobody = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur-md opacity-75 animate-pulse" />
             <div className="relative">
               <Image
-                src="/images/Sujal.jpg"
+                src="/Sujal.jpg"
                 className="rounded-full object-cover border-4 border-background shadow-2xl"
                 alt={`Profile picture of {name}`}
                 width={280}

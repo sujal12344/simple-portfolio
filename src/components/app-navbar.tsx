@@ -72,14 +72,14 @@ const AppNavbar = () => {
             <div className="flex items-center animate-pulse">
               <div>
                 <Image
-                  src="/images/arrow.png"
+                  src="/arrow.png"
                   className="  -rotate-90 -scale-y-100"
                   alt="PFP"
                   width={25}
                   height={5}
                 />
                 <Image
-                  src="/images/arrow.png"
+                  src="/arrow.png"
                   className="  rotate-90"
                   alt="PFP"
                   width={25}

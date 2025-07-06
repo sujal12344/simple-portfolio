@@ -9,7 +9,7 @@ export const ProjectData: ProjectType[] = [
     description:
       "A modern social media platform built with Next.js, React, and TypeScript. Features user authentication, posts, comments, likes, messaging, friend requests, notifications, and customizable profiles with dark/light mode support.",
     github: "https://github.com/sujal12344/Socially",
-    ImageUrl: "/images/Socially.png",
+    ImageUrl: "/Socially.png",
     websiteUrl: "https://socially-blond.vercel.app/",
     isFeatured: true,
   },
@@ -19,7 +19,7 @@ export const ProjectData: ProjectType[] = [
     description:
       "AI-Companion is a cool software that lets you create your own custom AI models of people you admire, like actors or celebrities. It's a tool to make personalized artificial intelligence companions based on your favorite individuals.",
     github: "https://github.com/sujal12344/AI-Companion-Builder",
-    ImageUrl: "/images/AI-Companion.png",
+    ImageUrl: "/AI-Companion.png",
     websiteUrl: "https://ai-companion-builder.vercel.app/",
     isFeatured: true,
   },
@@ -29,7 +29,7 @@ export const ProjectData: ProjectType[] = [
     description:
       "A real-time chat application using the MERN stack (MongoDB, Express, React, Node.js) with Socket.IO for instant messaging. The app should enable user account creation, secure real-time communication, and deliver a smooth, responsive chat experience.",
     github: "https://github.com/sujal12344/chat-app",
-    ImageUrl: "/images/chat-App.png",
+    ImageUrl: "/chat-App.png",
     websiteUrl: "https://chat-app-fyek.onrender.com/",
     isFeatured: true,
   },
@@ -39,7 +39,7 @@ export const ProjectData: ProjectType[] = [
     description:
       "An E-Commernce-Store where user easily buy good quality clothes and stylish shoes, glasses, bags, accessories, etc.",
     github: "https://github.com/sujal12344/E-commernce-website",
-    ImageUrl: "/images/E-com.png",
+    ImageUrl: "/E-com.png",
     websiteUrl: "https://e-commernce-website.onrender.com/",
     isFeatured: false,
   },
@@ -184,16 +184,16 @@ export const PersonalData = {
   },
   dev_tools: {
     name: "Dev Tools",
-    items: ["Docker", "AWS" , "Vercel AI SDK", "Stripe", "Git"],
-  }
+    items: ["Docker", "AWS", "Vercel AI SDK", "Stripe", "Git"],
+  },
 };
 
 export const MetaData: Metadata = {
   title: "Sujal's Portfolio",
   icons: {
-    icon: "/images/childish.png",
-    shortcut: "/images/childish.png",
-    apple: "/images/childish.png",
+    icon: "/childish.png",
+    shortcut: "/childish.png",
+    apple: "/childish.png",
   },
   description: "Portfolio of Sujal, A full stack developer and a curious mind",
   keywords: [
@@ -213,7 +213,7 @@ export const MetaData: Metadata = {
   //   siteName: "Sujal's Portfolio",
   //   images: [
   //     {
-  //       url: "/images/childish.png",
+  //       url: "/childish.png",
   //       width: 800,
   //       height: 600,
   //       alt: "Sujal's Portfolio",
@@ -227,7 +227,7 @@ export const MetaData: Metadata = {
   //   title: "Sujal's Portfolio",
   //   description:
   //     "Portfolio of Sujal, A full stack developer and a curious mind",
-  //   images: ["/images/childish.png"],
+  //   images: ["/childish.png"],
   //   creator: "@Sujalkeshar220",
   // },
   robots: {
@@ -263,7 +263,8 @@ export const Headers: HeaderItem[] = [
     number: "02",
     title: "Skills & Expertise",
     subtitle: "Technical Proficiency",
-    description: "In the middle of difficulty lies opportunity. Explore my web of skills and technologies.",
+    description:
+      "In the middle of difficulty lies opportunity. Explore my web of skills and technologies.",
     background: getBg("skills"),
     backgroundClosing: getBgClosing("skills"),
   },
@@ -272,7 +273,8 @@ export const Headers: HeaderItem[] = [
     number: "03",
     title: "Work Experience",
     subtitle: "My Coding Journey",
-    description: "Staying with the problems long enough — not just intelligent, but persistent.",
+    description:
+      "Staying with the problems long enough — not just intelligent, but persistent.",
     background: getBg("experience"),
     backgroundClosing: getBgClosing("experience"),
   },
@@ -281,7 +283,8 @@ export const Headers: HeaderItem[] = [
     number: "04",
     title: "Featured Projects",
     subtitle: "Problems and Paradigms",
-    description:"Weaving the web, one solution at a time. Explore my technical projects that solve real-world problems.",
+    description:
+      "Weaving the web, one solution at a time. Explore my technical projects that solve real-world problems.",
     background: getBg("projects"),
     backgroundClosing: getBgClosing("projects"),
   },
@@ -290,7 +293,8 @@ export const Headers: HeaderItem[] = [
     number: "05",
     title: "Get In Touch",
     subtitle: "Let's Build Something Amazing Together",
-    description: "Have a project in mind or just want to connect? Reach out and let's start a conversation.",
+    description:
+      "Have a project in mind or just want to connect? Reach out and let's start a conversation.",
     background: getBg("contact"),
     backgroundClosing: getBgClosing("contact"),
   },
