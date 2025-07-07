@@ -80,7 +80,7 @@ export const Experiences = [
     location: "Remote",
     period: "March 2025 - April 2025",
     description:
-      "A founding engineer who contributed heavily to building the backend using various AI libraries.",
+      "A founding engineer who contributed heavily to building the backend using various libraries.",
     achievements: [
       "Built a full-stack application in a team of 5 using Next.js, React.js, TypeScript, and Tailwind CSS.",
       "Developed a custom backend architecture with Node.js and PostgreSQL for scalable data handling.",
