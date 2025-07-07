@@ -78,7 +78,7 @@ export const Experiences = [
     company: "ParivartanX PRIVATE LIMITED",
     companyLink: "https://parivartanx.com/",
     location: "Remote",
-    period: "March 2024 - April 2025",
+    period: "March 2025 - April 2025",
     description:
       "A founding engineer who contributed heavily to building the backend using various AI libraries.",
     achievements: [
@@ -112,7 +112,7 @@ export const Experiences = [
     company: "Waves Ducks",
     companyLink: "https://wavesducks.com/",
     location: "Remote",
-    period: "May 2025 - Present",
+    period: "May 2025 - June 2025",
     description: `Contributed to blockchain-integrated NFT games like Waves Ducks and Arkimals under the Waves Protocol ecosystem.`,
     achievements: [
       "Developed smart NFT game features using JavaScript and Waves blockchain APIs",
