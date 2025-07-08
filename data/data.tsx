@@ -52,7 +52,8 @@ export const Experiences = [
     companyLink: "https://raffl.pro/",
     location: "Remote",
     period: "Sep 2024 - Jan 2025",
-    description: "Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript,  NextUI, framar-motion, and Zustand.",
+    description:
+      "Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript,  NextUI, framar-motion, and Zustand.",
     achievements: [
       "Established file structure and refactored large production-ready application",
       "Managed global state using Zustand",
@@ -113,7 +114,8 @@ export const Experiences = [
     companyLink: "https://wavesducks.com/",
     location: "Remote",
     period: "May 2025 - July 2025",
-    description: "Contributed to blockchain-integrated NFT games like Waves Ducks and Arkimals under the Waves Protocol ecosystem.",
+    description:
+      "Contributed to blockchain-integrated NFT games like Waves Ducks and Arkimals under the Waves Protocol ecosystem.",
     achievements: [
       "Developed smart NFT game features using JavaScript and Waves blockchain APIs",
       "Integrated breeding and trading logic in the Waves Ducks ecosystem",
@@ -238,10 +240,11 @@ export const MetaData: Metadata = {
 
 export const NavLinks = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
+  // { name: "Background", href: "#background" },
+  { name: "Services", href: "#services" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -250,17 +253,8 @@ const getBgClosing = (name: HeaderName): string => "</" + name + ">";
 
 export const Headers: HeaderItem[] = [
   {
-    name: "about",
-    number: "01",
-    title: "About Me",
-    subtitle: "Get to know me",
-    description: "A passionate developer with a curiosity for new technologies",
-    background: getBg("about"),
-    backgroundClosing: getBgClosing("about"),
-  },
-  {
     name: "skills",
-    number: "02",
+    number: "01",
     title: "Skills & Expertise",
     subtitle: "Technical Proficiency",
     description:
@@ -270,7 +264,7 @@ export const Headers: HeaderItem[] = [
   },
   {
     name: "experience",
-    number: "03",
+    number: "02",
     title: "Work Experience",
     subtitle: "My Coding Journey",
     description:
@@ -280,13 +274,22 @@ export const Headers: HeaderItem[] = [
   },
   {
     name: "projects",
-    number: "04",
+    number: "03",
     title: "Featured Projects",
     subtitle: "Problems and Paradigms",
     description:
       "Weaving the web, one solution at a time. Explore my technical projects that solve real-world problems.",
     background: getBg("projects"),
     backgroundClosing: getBgClosing("projects"),
+  },
+  {
+    name: "services",
+    number: "04",
+    title: "Services",
+    subtitle: "PASSION FUELS PURPOSE",
+    description: "A passionate developer with a curiosity for new technologies",
+    background: getBg("services"),
+    backgroundClosing: getBgClosing("services"),
   },
   {
     name: "contact",

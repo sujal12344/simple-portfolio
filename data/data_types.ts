@@ -11,7 +11,7 @@ export interface ProjectType {
   isFeatured?: boolean;
 }
 
-export type HeaderName = "home" | "about" | "skills" | "experience" | "projects" | "contact";
+export type HeaderName = "home" | "services" | "skills" | "experience" | "projects" | "contact";
 
 export interface HeaderItem {
   name: HeaderName;

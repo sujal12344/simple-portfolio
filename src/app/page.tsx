@@ -13,10 +13,10 @@ export default function Home() {
         <Navbar />
         <Herobody />
       </div>
-      <About />
       <Skill />
       <Experience />
       <Project />
+      <About />
       <Contact />
     </>
   );

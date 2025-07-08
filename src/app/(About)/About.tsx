@@ -19,16 +19,18 @@ import {
   Braces,
 } from "lucide-react";
 import DialogModal from "@/components/ui/dialogmodal";
+import { Headers } from "../../../data/data";
 
-const About = () => {
+const ServicesSection = () => {
+  const servicesHeader = Headers.find((header) => header.name === "services")!;
   return (
-    <div id="about" className="overflow-x-hidden py-10 relative">
+    <div id={servicesHeader.name} className="overflow-x-hidden py-12 relative">
       {/* Background elements - terminal-like decorations */}
       <div className="absolute top-20 left-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
-        {"<about>"}
+        {servicesHeader.background}
       </div>
       <div className="absolute bottom-20 right-0 opacity-5 text-2xl min-[500px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono">
-        {"</about>"}
+        {servicesHeader.backgroundClosing}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +45,8 @@ const About = () => {
           <div className="flex items-center gap-2 mb-2">
             <div className="h-px w-5 bg-primary" />
             <span className="text-primary font-mono text-sm px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-              01. <span className="text-foreground">About & Services</span>
+              {servicesHeader.number}.{" "}
+              <span className="text-foreground">{servicesHeader.title}</span>
             </span>
             <div className="h-px w-5 bg-primary" />
           </div>
@@ -55,7 +58,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-2 sm:mb-4 tracking-tight"
           >
-            PASSION FUELS PURPOSE
+            {servicesHeader.subtitle}
           </motion.h1>
 
           <motion.p
@@ -65,7 +68,8 @@ const About = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center max-w-2xl mx-auto text-lg"
           >
-             I build modern full-stack applications with a focus on clean code, high performance, and seamless user experiences.
+            I build modern full-stack applications with a focus on clean code,
+            high performance, and seamless user experiences.
           </motion.p>
         </motion.div>
 
@@ -250,4 +254,4 @@ const ServiceCard = ({
   );
 };
 
-export default About;
+export default ServicesSection;

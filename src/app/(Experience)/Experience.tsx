@@ -311,7 +311,7 @@ const ExperienceSection = () => {
 
   return (
     <div
-      className="overflow-hidden py-10 sm:py-8 md:py-10 relative bg-background"
+      className="overflow-hidden py-10 sm:py-10 md:py-12 relative bg-background"
       ref={containerRef}
       id={experiencesHeader.name}
     >
