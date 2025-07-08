@@ -73,7 +73,7 @@ const ProjectsSection = () => {
 
   return (
     <div
-      className="relative py-20 overflow-hidden bg-background"
+      className="relative py-10 overflow-hidden bg-background"
       id={projectHeader.name}
     >
       {/* Background elements */}

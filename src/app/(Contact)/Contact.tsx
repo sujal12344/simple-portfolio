@@ -217,7 +217,7 @@ const ContactSection = () => {
 
   return (
     <div
-      className="relative py-12 sm:py-16 md:py-20 overflow-hidden bg-background"
+      className="relative py-12 sm:py-8 md:py-10 overflow-hidden bg-background"
       id={contactHeader.name}
     >
       {/* Background elements - Adjusted for better mobile display */}

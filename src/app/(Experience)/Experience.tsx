@@ -311,7 +311,7 @@ const ExperienceSection = () => {
 
   return (
     <div
-      className="overflow-hidden py-10 xs:py-12 sm:py-16 md:py-20 relative bg-background"
+      className="overflow-hidden py-10 sm:py-8 md:py-10 relative bg-background"
       ref={containerRef}
       id={experiencesHeader.name}
     >
@@ -339,7 +339,7 @@ const ExperienceSection = () => {
                 scale: 1.05,
                 backgroundColor: "rgba(38, 54, 179, 0.15)",
               }}
-              className="text-primary font-mono text-xs xs:text-sm px-2 xs:px-3 py-0.5 xs:py-1 rounded-full bg-primary/10 border border-primary/20"
+              className="text-primary font-mono text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
             >
               {experiencesHeader.number}.{" "}<span className="text-foreground">{experiencesHeader.title}</span>
             </motion.span>

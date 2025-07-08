@@ -209,7 +209,7 @@ const SkillSection = () => {
   return (
     <div
       id={skillsHeader.name}
-      className="overflow-x-hidden py-10 sm:py-16 md:py-20 relative"
+      className="overflow-x-hidden py-8 sm:py-10 md:py-10 relative"
     >
       {/* Background elements */}
       <div className="absolute top-6 sm:top-10 md:top-20 left-0 opacity-5 text-xl sm:text-3xl md:text-5xl lg:text-6xl font-mono">
