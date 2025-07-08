@@ -52,7 +52,7 @@ export const Experiences = [
     companyLink: "https://raffl.pro/",
     location: "Remote",
     period: "Sep 2024 - Jan 2025",
-    description: `Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript,  NextUI, framar-motion, and Zustand.`,
+    description: "Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript,  NextUI, framar-motion, and Zustand.",
     achievements: [
       "Established file structure and refactored large production-ready application",
       "Managed global state using Zustand",
@@ -113,7 +113,7 @@ export const Experiences = [
     companyLink: "https://wavesducks.com/",
     location: "Remote",
     period: "May 2025 - July 2025",
-    description: `Contributed to blockchain-integrated NFT games like Waves Ducks and Arkimals under the Waves Protocol ecosystem.`,
+    description: "Contributed to blockchain-integrated NFT games like Waves Ducks and Arkimals under the Waves Protocol ecosystem.",
     achievements: [
       "Developed smart NFT game features using JavaScript and Waves blockchain APIs",
       "Integrated breeding and trading logic in the Waves Ducks ecosystem",

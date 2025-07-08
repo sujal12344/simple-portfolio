@@ -53,9 +53,9 @@ const About = () => {
             whileInView={{ y: 0 }}
             transition={{ duration: 0.7, type: "spring" }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 tracking-tight"
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-2 sm:mb-4 tracking-tight"
           >
-            PASSION FUELS PURPOSE.
+            PASSION FUELS PURPOSE
           </motion.h1>
 
           <motion.p
@@ -65,8 +65,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-muted-foreground text-center max-w-2xl mx-auto text-lg"
           >
-            I build full-stack applications with modern technologies, focusing
-            on clean code, performance, and exceptional user Experiences.
+             I build modern full-stack applications with a focus on clean code, high performance, and seamless user experiences.
           </motion.p>
         </motion.div>
 
@@ -77,7 +76,7 @@ const About = () => {
             title="Front-End Development"
             description="Creating responsive, interactive UIs"
             icon={<Component className="h-6 w-6 text-primary" />}
-            details="I transform designs into pixel-perfect, responsive interfaces that users love to interact with."
+            details="I turn designs into pixel-perfect, responsive UIs that offer intuitive and engaging user experiences."
             modalChecks={[
               "Creating smooth animation, effects that enhance UX (User Experience).",
               "Building responsive layouts that work across all devices and screen sizes.",
@@ -92,7 +91,7 @@ const About = () => {
             title="Back-End Development"
             description="Powerful, scalable server solutions"
             icon={<Server className="h-6 w-6 text-primary" />}
-            details="I build robust APIs and server-side applications that handle complex business logic efficiently."
+            details="I develop robust APIs and scalable back-end systems to power complex business workflows with efficiency."
             modalChecks={[
               "Creating efficient database schemas and query optimizations.",
               "Creating RESTful APIs that enable efficient, scalable data communication.",
@@ -107,7 +106,7 @@ const About = () => {
             title="Full-Stack Development"
             description="End-to-end application solutions"
             icon={<Braces className="h-6 w-6 text-primary" />}
-            details="I deliver complete applications from concept to deployment, handling both client and server sides."
+            details="I deliver full-stack solutions from concept to deployment, managing both front-end and back-end seamlessly."
             modalChecks={[
               "Developing efficient logic with serverless functions using Next.js and TypeScript.",
               "Optimizing entire application stacks for performance and scalability.",

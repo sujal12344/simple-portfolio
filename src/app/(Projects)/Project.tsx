@@ -114,7 +114,7 @@ const ProjectsSection = () => {
             whileInView={{ y: 0 }}
             transition={{ duration: 0.7, type: "spring" }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 tracking-tight"
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-2 sm:mb-4 tracking-tight"
           >
             {projectHeader.subtitle}
           </motion.h1>
