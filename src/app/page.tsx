@@ -1,6 +1,6 @@
 import Navbar from "./(Header)/Navbar";
 import Herobody from "./(Header)/Herobody";
-import About from "./(About)/About";
+import Services from "./(Services)/Services";
 import Skill from "./(Skills)/Skill";
 import Project from "./(Projects)/Project";
 import Contact from "./(Contact)/Contact";
@@ -16,7 +16,7 @@ export default function Home() {
       <Skill />
       <Experience />
       <Project />
-      <About />
+      <Services />
       <Contact />
     </>
   );
