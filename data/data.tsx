@@ -1,6 +1,11 @@
 import { Code, Gamepad, Terminal } from "lucide-react";
 import { Metadata } from "next";
-import { HeaderItem, HeaderName, ProjectType } from "./data_types";
+import {
+  HeaderItem,
+  HeaderName,
+  ProjectType,
+  PersonalInfo,
+} from "./data_types";
 
 export const ProjectData: ProjectType[] = [
   {
@@ -167,12 +172,13 @@ export const SkillsData = {
   ],
 };
 
-export const PersonalData = {
+export const PersonalData: PersonalInfo = {
   name: "Sujal Kesharwani",
   role: "Fullstack Developer",
   greet: "Welcome to my portfolio",
   greetIcon: "👋",
   bio: "Hi, I'm Sujal Kesharwani, a full stack developer with experience in building scalable web apps using modern industry technologies. I'm always curious and excited to explore new things.",
+  profileImage: "/Sujal.jpg",
   links: {
     github: "https://github.com/sujal12344",
     twitter: "https://twitter.com/Sujalkeshar220",
