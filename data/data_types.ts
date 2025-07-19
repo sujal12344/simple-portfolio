@@ -51,3 +51,8 @@ export interface PersonalInfo {
   dev_tools: TechStackItem;
   profileImage: string;
 }
+
+export interface NavLink {
+  name: string;
+  href: string;
+}[]
