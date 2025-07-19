@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { NavLink } from "../../../data/data_types";
+import { NavLinkItem } from "../../../data/data_types";
 
 interface NavLinksProps {
-  links: NavLink[];
+  links: NavLinkItem[];
   activeSection: string;
   onLinkClick: (targetId: string) => void;
 }

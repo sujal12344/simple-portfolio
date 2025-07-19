@@ -5,7 +5,7 @@ import {
   HeaderName,
   ProjectType,
   PersonalInfo,
-  NavLink,
+  NavLinkItem,
 } from "./data_types";
 
 export const ProjectData: ProjectType[] = [
@@ -245,7 +245,7 @@ export const MetaData: Metadata = {
   },
 };
 
-export const NavLinks: NavLink[] = [
+export const NavLinks: NavLinkItem[] = [
   { name: "Home", href: "#home" },
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },

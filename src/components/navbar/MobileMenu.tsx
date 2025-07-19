@@ -1,11 +1,11 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Twitter, LinkedinIcon, File } from "lucide-react";
-import { NavLink } from "../../../data/data_types";
+import { NavLinkItem } from "../../../data/data_types";
 
 interface MobileMenuProps {
   isOpen: boolean;
-  links: NavLink[];
+  links: NavLinkItem[];
   activeSection: string;
   socialLinks: {
     github: string;

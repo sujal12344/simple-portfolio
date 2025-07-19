@@ -34,6 +34,11 @@ export interface TechStackItem {
   items: string[];
 }
 
+export interface NavLinkItem {
+  name: string;
+  href: string;
+}
+
 export interface PersonalInfo {
   name: string;
   role: string;
@@ -51,8 +56,3 @@ export interface PersonalInfo {
   dev_tools: TechStackItem;
   profileImage: string;
 }
-
-export interface NavLink {
-  name: string;
-  href: string;
-}[]

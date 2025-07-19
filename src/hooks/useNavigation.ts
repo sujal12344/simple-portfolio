@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { NavLink } from "../../data/data_types";
+import { NavLinkItem } from "../../data/data_types";
 
-export const useNavigation = (navLinks: NavLink[]) => {
+export const useNavigation = (navLinks: NavLinkItem[]) => {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 

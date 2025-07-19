@@ -1,4 +1,33 @@
-export const navbarConfig = {
+export interface NavbarConfig {
+  layout: {
+    desktop: {
+      container: string;
+      logoSection: string;
+      themeSection: string;
+    };
+    mobile: {
+      container: string;
+      header: string;
+      controls: string;
+    };
+  };
+  styling: {
+    scrolled: string;
+    default: string;
+    mobileScrolled: string;
+    mobileDefault: string;
+  };
+  animations: {
+    mobileMenu: {
+      initial: { opacity: number; height: number | string };
+      animate: { opacity: number; height: number | string };
+      exit: { opacity: number; height: number | string };
+      transition: { duration: number };
+    };
+  };
+}
+
+export const navbarConfig: NavbarConfig = {
   layout: {
     desktop: {
       container:
