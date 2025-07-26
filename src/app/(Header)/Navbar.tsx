@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { NavLinks, PersonalData } from "../../../data/data";
+import { NavLinks, PersonalData } from "@/data/data";
+import { Button } from "@/components/ui/button";
 import { navbarConfig } from "@/config/navbar.config";
 import { useNavigation } from "@/hooks/useNavigation";
 import { useSocialPanel } from "@/hooks/useSocialPanel";

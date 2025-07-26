@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { PersonalData } from "../../../data/data";
+import { PersonalData } from "@/data/data";
 import { heroConfig } from "@/config/hero.config";
 import {
   HeroGreeting,

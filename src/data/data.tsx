@@ -167,11 +167,8 @@ export const SkillsData = {
     { name: "Docker", level: 75 },
     { name: "Stripe", level: 70 },
     { name: "Git", level: 90 },
-    // { name: "VectorDB", level: 65 },
-    // { name: "Langchain", level: 70 },
-    // { name: "S3", level: 75 },
   ],
-};
+} as const;
 
 export const PersonalData: PersonalInfo = {
   name: "Sujal Kesharwani",
@@ -255,57 +252,56 @@ export const NavLinks: NavLinkItem[] = [
   { name: "Contact", href: "#contact" },
 ];
 
-const getBg = (name: HeaderName): string => "<" + name + ">";
-const getBgClosing = (name: HeaderName): string => "</" + name + ">";
+const createHeaderItem = (
+  name: HeaderName,
+  number: string,
+  title: string,
+  subtitle: string,
+  description: string
+): HeaderItem => ({
+  name,
+  number,
+  title,
+  subtitle,
+  description,
+  background: `<${name}>`,
+  backgroundClosing: `</${name}>`,
+});
 
 export const Headers: HeaderItem[] = [
-  {
-    name: "skills",
-    number: "01",
-    title: "Skills & Expertise",
-    subtitle: "Technical Proficiency",
-    description:
-      "In the middle of difficulty lies opportunity. Explore my web of skills and technologies.",
-    background: getBg("skills"),
-    backgroundClosing: getBgClosing("skills"),
-  },
-  {
-    name: "experience",
-    number: "02",
-    title: "Work Experience",
-    subtitle: "My Coding Journey",
-    description:
-      "Staying with the problems long enough — not just intelligent, but persistent.",
-    background: getBg("experience"),
-    backgroundClosing: getBgClosing("experience"),
-  },
-  {
-    name: "projects",
-    number: "03",
-    title: "Featured Projects",
-    subtitle: "Problems and Paradigms",
-    description:
-      "Weaving the web, one solution at a time. Explore my technical projects that solve real-world problems.",
-    background: getBg("projects"),
-    backgroundClosing: getBgClosing("projects"),
-  },
-  {
-    name: "services",
-    number: "04",
-    title: "Services",
-    subtitle: "PASSION FUELS PURPOSE",
-    description: "A passionate developer with a curiosity for new technologies",
-    background: getBg("services"),
-    backgroundClosing: getBgClosing("services"),
-  },
-  {
-    name: "contact",
-    number: "05",
-    title: "Get In Touch",
-    subtitle: "Let's Build Something Amazing Together",
-    description:
-      "Have a project in mind or just want to connect? Reach out and let's start a conversation.",
-    background: getBg("contact"),
-    backgroundClosing: getBgClosing("contact"),
-  },
+  createHeaderItem(
+    "skills",
+    "01",
+    "Skills & Expertise",
+    "Technical Proficiency",
+    "In the middle of difficulty lies opportunity. Explore my web of skills and technologies."
+  ),
+  createHeaderItem(
+    "experience",
+    "02",
+    "Work Experience",
+    "My Coding Journey",
+    "Staying with the problems long enough — not just intelligent, but persistent."
+  ),
+  createHeaderItem(
+    "projects",
+    "03",
+    "Featured Projects",
+    "Problems and Paradigms",
+    "Weaving the web, one solution at a time. Explore my technical projects that solve real-world problems."
+  ),
+  createHeaderItem(
+    "services",
+    "04",
+    "Services",
+    "PASSION FUELS PURPOSE",
+    "A passionate developer with a curiosity for new technologies"
+  ),
+  createHeaderItem(
+    "contact",
+    "05",
+    "Get In Touch",
+    "Let's Build Something Amazing Together",
+    "Have a project in mind or just want to connect? Reach out and let's start a conversation."
+  ),
 ];

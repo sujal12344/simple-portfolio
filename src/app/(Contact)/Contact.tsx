@@ -14,7 +14,7 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
-import { Headers, PersonalData } from "../../../data/data";
+import { Headers, PersonalData } from "../../data/data";
 
 const ContactSection = () => {
   const [formStatus, setFormStatus] = useState<
@@ -142,7 +142,9 @@ const ContactSection = () => {
 
     try {
       // Get all form data
-      const formElement = document.getElementById("contact-form") as HTMLFormElement;
+      const formElement = document.getElementById(
+        "contact-form"
+      ) as HTMLFormElement;
       const formData = new FormData(formElement);
       const formValues = Object.fromEntries(formData);
 
@@ -213,7 +215,8 @@ const ContactSection = () => {
 
   const contactHeader = Headers.find((h) => h.name === "contact")!;
 
-  const autoResponse = "Thank you for contacting Sujal! I've received your message and will get back to you as soon as possible.";
+  const autoResponse =
+    "Thank you for contacting Sujal! I've received your message and will get back to you as soon as possible.";
 
   return (
     <div
@@ -457,7 +460,11 @@ const ContactSection = () => {
                     name="_subject"
                     value="New contact from portfolio"
                   />
-                  <input type="hidden" name="_cc" value={process.env.NEXT_PUBLIC_SECONDARY_EMAIL} />{" "}
+                  <input
+                    type="hidden"
+                    name="_cc"
+                    value={process.env.NEXT_PUBLIC_SECONDARY_EMAIL}
+                  />{" "}
                   {/* Optional: CC another email */}
                   <input
                     type="hidden"

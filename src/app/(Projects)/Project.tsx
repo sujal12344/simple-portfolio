@@ -1,7 +1,7 @@
 "use client";
 import { motion, useAnimation, useInView } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
-import { PersonalData, ProjectData, Headers } from "../../../data/data";
+import { PersonalData, ProjectData, Headers } from "@/data/data";
 import {
   ArrowRight,
   Code,
@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { ProjectType } from "../../../data/data_types";
+import { ProjectType } from "@/data/data_types";
 
 // TypeScript assertion to ensure proper type for ProjectData
 const typedProjectData = ProjectData;
@@ -139,72 +139,67 @@ const ProjectsSection = () => {
           className="mb-16"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {featuredProjects.map(
-              (
-                project: ProjectType,
-                index: number
-              ) => (
-                <motion.div
-                  key={project.id}
-                  className="group relative h-[300px] overflow-hidden rounded-lg border border-primary/10 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
-                  whileHover={{ scale: 1.02 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  onHoverStart={() => setHoveredProject(project.id)}
-                  onHoverEnd={() => setHoveredProject(null)}
-                  onClick={() => {
-                    window.open(project.websiteUrl, "_blank");
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/60 to-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+            {featuredProjects.map((project: ProjectType, index: number) => (
+              <motion.div
+                key={project.id}
+                className="group relative h-[300px] overflow-hidden rounded-lg border border-primary/10 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onHoverStart={() => setHoveredProject(project.id)}
+                onHoverEnd={() => setHoveredProject(null)}
+                onClick={() => {
+                  window.open(project.websiteUrl, "_blank");
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/60 to-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
-                  <Image
-                    src={project.ImageUrl || "/placeholder-project.jpg"}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-all duration-500 group-hover:scale-105"
-                    quality={90}
-                  />
+                <Image
+                  src={project.ImageUrl || "/placeholder-project.jpg"}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-all duration-500 group-hover:scale-105"
+                  quality={90}
+                />
 
-                  <div className="absolute inset-0 flex flex-col justify-end p-5 z-20">
-                    <div className="transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                      <div className="text-xs font-mono text-primary/80 mb-1">
-                        Featured Project
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-white/80 line-clamp-2 mb-3">
-                        {project.description}
-                      </p>
-                      <div className="flex space-x-2">
-                        {project.github && (
-                          <Link
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors duration-200"
-                          >
-                            <Github className="h-4 w-4" />
-                          </Link>
-                        )}
-                        {project.websiteUrl && (
-                          <Link
-                            href={project.websiteUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors duration-200"
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                          </Link>
-                        )}
-                      </div>
+                <div className="absolute inset-0 flex flex-col justify-end p-5 z-20">
+                  <div className="transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className="text-xs font-mono text-primary/80 mb-1">
+                      Featured Project
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-white/80 line-clamp-2 mb-3">
+                      {project.description}
+                    </p>
+                    <div className="flex space-x-2">
+                      {project.github && (
+                        <Link
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors duration-200"
+                        >
+                          <Github className="h-4 w-4" />
+                        </Link>
+                      )}
+                      {project.websiteUrl && (
+                        <Link
+                          href={project.websiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors duration-200"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </Link>
+                      )}
                     </div>
                   </div>
-                </motion.div>
-              )
-            )}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 

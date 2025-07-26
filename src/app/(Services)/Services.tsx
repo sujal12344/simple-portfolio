@@ -19,7 +19,7 @@ import {
   Braces,
 } from "lucide-react";
 import DialogModal from "@/components/ui/dialogmodal";
-import { Headers } from "../../../data/data";
+import { Headers } from "@/data/data";
 
 const ServicesSection = () => {
   const servicesHeader = Headers.find((header) => header.name === "services")!;

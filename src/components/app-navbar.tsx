@@ -19,7 +19,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { PersonalData } from "../../data/data";
+import { PersonalData } from "@/data/data";
 
 const AppNavbar = () => {
   const theme = useTheme();

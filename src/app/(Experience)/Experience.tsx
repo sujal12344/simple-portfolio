@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Calendar, ChevronRight, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
-import { Experiences, Headers, PersonalData } from "../../../data/data";
+import { Experiences, Headers, PersonalData } from "@/data/data";
 
 // Custom hook for responsive design
 const useResponsiveLayout = () => {
@@ -307,7 +307,9 @@ const ExperienceSection = () => {
     links: { github },
   } = PersonalData;
 
-  const experiencesHeader = Headers.find(header => header.name === "experience")!
+  const experiencesHeader = Headers.find(
+    (header) => header.name === "experience"
+  )!;
 
   return (
     <div
@@ -341,7 +343,8 @@ const ExperienceSection = () => {
               }}
               className="text-primary font-mono text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
             >
-              {experiencesHeader.number}.{" "}<span className="text-foreground">{experiencesHeader.title}</span>
+              {experiencesHeader.number}.{" "}
+              <span className="text-foreground">{experiencesHeader.title}</span>
             </motion.span>
             <div className="h-px w-3 xs:w-5 bg-primary" />
           </div>

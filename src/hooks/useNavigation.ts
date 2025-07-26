@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { NavLinkItem } from "../../data/data_types";
+import { NavLinkItem } from "@/data/data_types";
 
 export const useNavigation = (navLinks: NavLinkItem[]) => {
   const [activeSection, setActiveSection] = useState("home");
