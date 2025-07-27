@@ -1,4 +1,3 @@
-import { Code, Gamepad, Terminal } from "lucide-react";
 import { Metadata } from "next";
 import {
   HeaderItem,

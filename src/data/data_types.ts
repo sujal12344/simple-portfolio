@@ -39,6 +39,22 @@ export interface NavLinkItem {
   href: string;
 }
 
+export interface ExperienceType {
+  title: string;
+  company: string;
+  companyLink: string;
+  location?: string;
+  period: string;
+  description: string;
+  achievements: string[];
+  technologies: string[];
+  color: string;
+  icon?: React.ReactNode;
+  proofLink?: string;
+  companyLogo?: string;
+  companyLogoStyle?: string;
+}
+
 export interface PersonalInfo {
   name: string;
   role: string;
