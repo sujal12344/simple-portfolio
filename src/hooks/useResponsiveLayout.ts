@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { EXPERIENCE_CONSTANTS } from "../lib/experience-utils";
+import { EXPERIENCE_CONSTANTS } from "@/lib/experience-utils";
 
 export const useResponsiveLayout = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Filter } from "lucide-react";
-import { PROJECTS_CONSTANTS } from "../../lib/projects-utils";
+import { PROJECTS_CONSTANTS } from "@/lib/projects-utils";
 
 interface CategoryFilterProps {
   categories: string[];
