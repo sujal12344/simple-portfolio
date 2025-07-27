@@ -8,6 +8,18 @@ const nextConfig = {
       {
         hostname: 'github.com',
         protocol: 'https',
+      },
+      {
+        hostname: 'arkimals-game.com',
+        protocol: 'https',
+      },
+      {
+        hostname: 'parivartanx.com',
+        protocol: 'https',
+      },
+      {
+        hostname: 'raffl.pro',
+        protocol: 'https',
       }
     ]
 
