@@ -104,7 +104,7 @@ export const Experiences: ExperienceType[] = [
     ],
     technologies: ["Next.js", "React", "TypeScript", "NextUI", "Tailwind CSS", "Zustand", "Framer Motion"],
     color: "from-yellow-200 to-yellow-400",
-    companyLogo: "https://raffl.pro/RAFFL_LOGO.svg",
+    companyLogo: "https://raffl.vercel.app/RAFFL_LOGO.svg",
     companyLogoStyle: "sm:h-12 sm:w-12 h-8 w-8 translate-x-0 mr-2 rounded-full scale-[3.5]",
   },
 ];
