@@ -77,6 +77,7 @@ export interface PersonalInfo {
   bio: string;
   links: SocialLinks;
   tech_stack: TechStackItem;
+  currently_exploring: TechStackItem;
   dev_tools: TechStackItem;
   profileImage: string;
 }

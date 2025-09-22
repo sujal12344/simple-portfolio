@@ -19,6 +19,7 @@ const Herobody = () => {
     greetIcon,
     role,
     tech_stack,
+    currently_exploring,
     dev_tools,
     profileImage,
   } = PersonalData;
@@ -58,12 +59,15 @@ const Herobody = () => {
             items={tech_stack.items}
             delay={animations.delays.techStack}
           />
-
-          {/* Uncomment to show dev tools */}
-          {/* <TechStack
-            title={dev_tools.name}
+          <TechStack
+            name={dev_tools.name}
             items={dev_tools.items}
             delay={animations.delays.techStack + 0.2}
+          />
+          {/* <TechStack
+            name={currently_exploring.name}
+            items={currently_exploring.items}
+            delay={animations.delays.techStack + 0.4}
           /> */}
         </motion.div>
 

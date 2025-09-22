@@ -117,7 +117,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
                   </h3>
                   <div className="flex items-center text-muted-foreground text-sm xs:text-base">
                     <span
-                      className="font-medium cursor-pointer hover:text-blue-500 transition-colors duration-200"
+                      className="font-medium cursor-pointer hover:text-blue-500 transition-colors duration-200 underline underline-offset-4 text-primary"
                       onClick={() => openInNewTab(companyLink)}
                     >
                       {company}
