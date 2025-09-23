@@ -142,7 +142,7 @@ export const PersonalData: PersonalInfo = {
     github: "https://github.com/sujal12344",
     twitter: "https://twitter.com/Sujalkeshar220",
     linkedin: "https://www.linkedin.com/in/sujal-kesharwani-518798368/",
-    resume: "https://childish.tiiny.site/",
+    resume: "https://sujal.tiiny.site/",
     linktree: "https://linktr.ee/childishhh",
   },
   tech_stack: {
