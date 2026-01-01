@@ -13,6 +13,24 @@ import {
 export const ProjectData: ProjectType[] = [
   {
     id: 1,
+    title: "ForgeCommerce",
+    description: "ForgeCommerce is a headless CMS webapp where the user can create, update or delete their necessary data for making cool e-commerce stores with built-in payment processing and minimalistic UI",
+    github: "https://github.com/sujal12344/ForgeCommerce",
+    ImageUrl: "/ForgeCommerce.png",
+    websiteUrl: "https://forge-commerce.vercel.app/",
+    isFeatured: true,
+  },
+  {
+    id: 2,
+    title: "ForgeStore",
+    description: "The second part of the project where the data displaying on the e-commerce store will be coming from the ecomm-dashboard-store which is working as an API and using stripe for checking out",
+    github: "https://github.com/sujal12344/Forge-ecomm-store/",
+    ImageUrl: "/ForgeStore.png",
+    websiteUrl: "https://forge-ecomm-store.vercel.app/",
+    isFeatured: true,
+  },
+  {
+    id: 3,
     title: "Socially",
     description: "A modern social media platform built with Next.js, React, and TypeScript. Features user authentication, posts, comments, likes, messaging, friend requests, notifications, and customizable profiles with dark/light mode support.",
     github: "https://github.com/sujal12344/Socially",
@@ -21,7 +39,7 @@ export const ProjectData: ProjectType[] = [
     isFeatured: true,
   },
   {
-    id: 2,
+    id: 4,
     title: "AI Companion",
     description: "AI-Companion is a cool software that lets you create your own custom AI models of people you admire, like actors or celebrities. It's a tool to make personalized artificial intelligence companions based on your favorite individuals.",
     github: "https://github.com/sujal12344/AI-Companion-Builder",
@@ -30,7 +48,7 @@ export const ProjectData: ProjectType[] = [
     isFeatured: true,
   },
   {
-    id: 3,
+    id: 5,
     title: "Chatting Application",
     description: "A real-time chat application using the MERN stack (MongoDB, Express, React, Node.js) with Socket.IO for instant messaging. The app should enable user account creation, secure real-time communication, and deliver a smooth, responsive chat experience.",
     github: "https://github.com/sujal12344/chat-app",
@@ -39,7 +57,7 @@ export const ProjectData: ProjectType[] = [
     isFeatured: true,
   },
   {
-    id: 4,
+    id: 6,
     title: "E-Commerce Store",
     description: "An E-Commerce Store where users can easily buy good quality clothes and stylish shoes, glasses, bags, accessories, etc.",
     github: "https://github.com/sujal12344/E-commernce-website",
@@ -56,7 +74,7 @@ export const Experiences: ExperienceType[] = [
     company: "Arkimals",
     companyLink: "https://arkimals-game.com/",
     location: "Remote",
-    period: "May 2025 - Aug 2025",
+    period: "May 2025 - Present",
     description: "Contributed to blockchain-integrated NFT games like Waves Ducks and Arkimals under the Waves Protocol ecosystem.",
     achievements: [
       "Refactored a large codebase across 5+ microservices, improving maintainability and reducing technical debt by 30%.",
@@ -92,7 +110,7 @@ export const Experiences: ExperienceType[] = [
     company: "Neotix Lab Private Limited",
     companyLink: "https://raffl.vercel.app/",
     location: "Remote",
-    period: "Feb 2024 - May 2025",
+    period: "Feb 2025 - May 2025",
     description: "Worked on the frontend of the Raffl's website using Nextjs, React.js, TypeScript, NextUI, framer-motion, and Zustand.",
     achievements: [
       "Developed the frontend for Raffl, a web3 platform enabling users to create raffles, write blogs, and design quests, resulting in a 40% increase in user participation.",
@@ -142,7 +160,7 @@ export const PersonalData: PersonalInfo = {
     github: "https://github.com/sujal12344",
     twitter: "https://twitter.com/Sujalkeshar220",
     linkedin: "https://www.linkedin.com/in/sujal-kesharwani-518798368/",
-    resume: "https://sujal.tiiny.site/",
+    resume: "https://sujal-resume.tiiny.site/",
     linktree: "https://linktr.ee/childishhh",
   },
   tech_stack: {
@@ -201,9 +219,9 @@ const createHeaderItem = (
 
 // Headers configuration
 export const Headers: HeaderItem[] = [
-  createHeaderItem("skills", "01", "Skills & Expertise", "Technical Proficiency", "In the middle of difficulty lies opportunity. Explore my web of skills and technologies."),
+  createHeaderItem("skills", "01", "Skills & Expertise", "Technical Proficiency", "In the middle of difficulty lies opportunity. Explore my skills and technologies."),
   createHeaderItem("experience", "02", "Work Experience", "My Coding Journey", "Staying with the problems long enough — not just intelligent, but persistent."),
-  createHeaderItem("projects", "03", "Featured Projects", "Problems and Paradigms", "Weaving the web, one solution at a time. Explore my technical projects that solve real-world problems."),
+  createHeaderItem("projects", "03", "Featured Projects", "Problems and Paradigms", "Weaving the web, one solution at a time. Explore my projects that solve some real-world problems and some just for fun."),
   createHeaderItem("services", "04", "Services", "PASSION FUELS PURPOSE", "A passionate developer with a curiosity for new technologies"),
   createHeaderItem("contact", "05", "Get In Touch", "Let's Build Something Amazing Together", "Have a project in mind or just want to connect? Reach out and let's start a conversation."),
 ];
