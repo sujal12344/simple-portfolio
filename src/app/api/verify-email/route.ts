@@ -1,43 +1,65 @@
+import { API_ERROR_MESSAGES } from "@/config/constants";
+import { EmailValidationError } from "@/data/data_types";
+import { verifyEmailWithAbstractAPI } from "@/lib/utils/email";
+import { isValidEmailFormat } from "@/lib/utils/form";
 import { NextResponse } from "next/server";
 
+/**
+ * POST handler for email verification
+ * @route POST /api/verify-email
+ * @body { email: string }
+ * @returns EmailValidationResult | EmailValidationError
+ */
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
 
+    // Validate input
     if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 });
-    }
-
-    const verifyEmailUrl = process.env.NEXT_PUBLIC_VERIFY_EMAIL_URL;
-    const verifyEmailToken = process.env.NEXT_PUBLIC_VERIFY_EMAIL_TOKEN;
-
-    if (!verifyEmailToken || !verifyEmailUrl) {
       return NextResponse.json(
-        {
-          error: "Server configuration error",
-        },
-        { status: 500 }
+        { error: API_ERROR_MESSAGES.EMAIL_REQUIRED },
+        { status: 400 },
       );
     }
 
-    const verifyUrl = `${verifyEmailUrl}/${email}?token=${verifyEmailToken}`;
-
-    const response = await fetch(verifyUrl);
-
-    if (!response.ok) {
-      throw new Error(`API responded with status: ${response.status}`);
+    if (!isValidEmailFormat(email)) {
+      return NextResponse.json(
+        { error: API_ERROR_MESSAGES.INVALID_EMAIL_FORMAT },
+        { status: 400 },
+      );
     }
 
-    const data = await response.json();
-    return NextResponse.json(data);
+    // Verify email with AbstractAPI
+    const validationResult = await verifyEmailWithAbstractAPI(email);
+
+    return NextResponse.json(validationResult, { status: 200 });
   } catch (error) {
-    console.error("Error verifying email:", error);
+    console.error("Email verification error:", error);
+
+    // Handle quota exhaustion specifically
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "isQuotaExhausted" in error &&
+      (error as EmailValidationError).isQuotaExhausted
+    ) {
+      return NextResponse.json(
+        {
+          error: API_ERROR_MESSAGES.API_QUOTA_EXHAUSTED,
+          details: API_ERROR_MESSAGES.QUOTA_DETAILS,
+          isQuotaExhausted: true,
+        },
+        { status: 429 },
+      );
+    }
+
+    // Handle general errors
     return NextResponse.json(
       {
-        error: "Failed to verify email",
+        error: API_ERROR_MESSAGES.API_STATUS_ERROR(500),
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

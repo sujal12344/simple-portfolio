@@ -91,3 +91,48 @@ export interface ContactFormData {
 
 export type FormStatus = "idle" | "loading" | "success" | "error";
 export type EmailValidationState = boolean | null;
+
+// Email Validation Types
+export interface AbstractAPIResponse {
+  email_address: string;
+  email_deliverability: {
+    status: string;
+    status_detail: string;
+    is_format_valid: boolean;
+    is_smtp_valid: boolean;
+    is_mx_valid: boolean;
+    mx_records: string[];
+  };
+  email_quality: {
+    score: number;
+    is_free_email: boolean;
+    is_disposable: boolean;
+    is_catchall: boolean;
+    is_role: boolean;
+  };
+  email_risk: {
+    address_risk_status: string;
+    domain_risk_status: string;
+  };
+}
+
+export interface EmailValidationResult {
+  status: boolean;
+  checks: {
+    smtp: boolean;
+    format: boolean;
+    mx: boolean;
+  };
+  details: {
+    deliverability: string;
+    quality_score: number;
+    is_disposable: boolean;
+    risk_level: string;
+  };
+}
+
+export interface EmailValidationError {
+  error: string;
+  details?: string;
+  isQuotaExhausted?: boolean;
+}

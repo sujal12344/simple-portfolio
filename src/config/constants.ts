@@ -31,6 +31,23 @@ export const VALIDATION_MESSAGES = {
   EMAIL_VERIFIED: 'Email verified!',
   EMAIL_INVALID: 'This email address appears to be invalid',
   EMAIL_VERIFICATION_FAILED: 'Could not verify email',
+  DISPOSABLE_EMAIL: 'Disposable email addresses are not allowed',
+  QUOTA_EXHAUSTED: 'Email verification temporarily unavailable',
   FORM_SUCCESS: "Message sent successfully! I'll get back to you soon.",
   FORM_ERROR: 'There was an error sending your message. Please try again.',
 } as const;
+
+// API Error Messages
+export const API_ERROR_MESSAGES = {
+  API_KEY_NOT_CONFIGURED: 'AbstractAPI key is not configured',
+  API_BASE_URL_NOT_CONFIGURED: 'ABSTRACTAPI_BASE_URL is not configured',
+  API_QUOTA_EXHAUSTED: 'API quota exhausted',
+  QUOTA_DETAILS: 'Email verification service has reached its usage limit',
+  INVALID_RESPONSE_STRUCTURE: 'Invalid API response structure',
+  EMAIL_REQUIRED: 'Email is required',
+  INVALID_EMAIL_FORMAT: 'Invalid email format',
+  API_STATUS_ERROR: (status: number) => `API responded with status: ${status}`,
+} as const;
+
+// API Quota Keywords
+export const QUOTA_KEYWORDS = ['quota', 'limit', 'exceeded', 'exhausted', 'usage limit'] as const;
