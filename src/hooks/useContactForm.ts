@@ -1,81 +1,93 @@
-import { useState, useCallback } from 'react';
-import { ContactFormData, FormStatus } from '@/data/data_types';
-import { API_ENDPOINTS, FORM_CONFIG } from '@/config/constants';
+import { API_ENDPOINTS, FORM_CONFIG } from "@/config/constants";
+import { ContactFormData, FormStatus } from "@/data/data_types";
+import { useCallback, useState } from "react";
 
 interface UseContactFormReturn {
   formData: ContactFormData;
   formStatus: FormStatus;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  handleSubmit: (e: React.FormEvent, validateEmail: (email: string) => Promise<void>, isEmailValid: boolean | null) => Promise<void>;
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  handleSubmit: (
+    e: React.FormEvent,
+    validateEmail: (email: string) => Promise<void>,
+    isEmailValid: boolean | null,
+  ) => Promise<void>;
   resetForm: () => void;
 }
 
 const initialFormData: ContactFormData = {
-  email: '',
-  name: '',
-  message: '',
+  email: "",
+  name: "",
+  message: "",
 };
 
 export const useContactForm = (): UseContactFormReturn => {
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
-  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
+  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  }, []);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    },
+    [],
+  );
 
-  const handleSubmit = useCallback(async (
-    e: React.FormEvent,
-    validateEmail: (email: string) => Promise<void>,
-    isEmailValid: boolean | null
-  ) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    async (
+      e: React.FormEvent,
+      validateEmail: (email: string) => Promise<void>,
+      isEmailValid: boolean | null,
+    ) => {
+      e.preventDefault();
 
-    // Validate email if not already validated
-    if (formData.email && (isEmailValid === null || isEmailValid === false)) {
-      setFormStatus('loading');
-      await validateEmail(formData.email);
-      
-      if (!isEmailValid) {
-        setFormStatus('idle');
-        return;
-      }
-    }
+      // Validate email if not already validated
+      if (formData.email && (isEmailValid === null || isEmailValid === false)) {
+        setFormStatus("loading");
+        await validateEmail(formData.email);
 
-    setFormStatus('loading');
-
-    try {
-      const response = await fetch(API_ENDPOINTS.SUBMIT_FORM, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Server responded with status: ${response.status}`);
+        if (!isEmailValid) {
+          setFormStatus("idle");
+          return;
+        }
       }
 
-      const result = await response.json();
+      setFormStatus("loading");
 
-      if (result.success === true) {
-        setFormStatus('success');
-        setFormData(initialFormData);
-      } else {
-        console.error('Form submission failed:', result);
-        setFormStatus('error');
+      try {
+        const response = await fetch(API_ENDPOINTS.SUBMIT_FORM, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server responded with status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success === true) {
+          setFormStatus("success");
+          setFormData(initialFormData);
+        } else {
+          console.error("Form submission failed:", result);
+          setFormStatus("error");
+        }
+      } catch (error) {
+        console.error("Form submission error:", error);
+        setFormStatus("error");
       }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setFormStatus('error');
-    }
 
-    setTimeout(() => setFormStatus('idle'), FORM_CONFIG.STATUS_RESET_DELAY);
-  }, [formData]);
+      setTimeout(() => setFormStatus("idle"), FORM_CONFIG.STATUS_RESET_DELAY);
+    },
+    [formData],
+  );
 
   const resetForm = useCallback(() => {
     setFormData(initialFormData);
-    setFormStatus('idle');
+    setFormStatus("idle");
   }, []);
 
   return {

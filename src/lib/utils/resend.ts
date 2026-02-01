@@ -2,9 +2,9 @@
  * Email sending utility functions using Resend
  */
 
-import { CONTACT_INFO, EMAIL_CONFIG, EMAIL_TEMPLATE } from "@/config/constants";
+import { CONTACT_INFO, EMAIL_CONFIG, EMAIL_MESSAGES, EMAIL_TEMPLATE } from "@/config/constants";
 import { ContactFormData } from "@/data/data_types";
-import { Resend } from "resend";
+import { CreateEmailResponseSuccess, Resend } from "resend";
 
 /**
  * Initialize Resend client
@@ -13,7 +13,7 @@ export const getResendClient = () => {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey) {
-    throw new Error("RESEND_API_KEY is not configured");
+    throw new Error(EMAIL_MESSAGES.RESEND_KEY_NOT_CONFIGURED);
   }
 
   return new Resend(apiKey);
@@ -176,7 +176,7 @@ export const generateEmailHTML = (formData: ContactFormData): string => {
 /**
  * Send email using Resend
  */
-export const sendEmail = async (formData: ContactFormData) => {
+export const sendEmail = async (formData: ContactFormData): Promise<CreateEmailResponseSuccess> => {
   const resend = getResendClient();
 
   const { data, error } = await resend.emails.send({
