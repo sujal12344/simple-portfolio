@@ -59,7 +59,7 @@ export const verifyEmailWithAbstractAPI = async (
   email: string,
 ): Promise<EmailValidationResult> => {
   const apiKey = process.env.ABSTRACTAPI_KEY;
-  const baseUrl = process.env.NEXT_PUBLIC_ABSTRACTAPI_BASE_URL;
+  const baseUrl = process.env.ABSTRACTAPI_BASE_URL;
 
   if (!apiKey) {
     throw new Error(API_ERROR_MESSAGES.API_KEY_NOT_CONFIGURED);
