@@ -46,14 +46,10 @@ export const useContactForm = (): UseContactFormReturn => {
     setFormStatus('loading');
 
     try {
-      const formElement = document.getElementById('contact-form') as HTMLFormElement;
-      const formDataObj = new FormData(formElement);
-      const formValues = Object.fromEntries(formDataObj);
-
       const response = await fetch(API_ENDPOINTS.SUBMIT_FORM, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formValues),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
@@ -62,7 +58,7 @@ export const useContactForm = (): UseContactFormReturn => {
 
       const result = await response.json();
 
-      if (result.success === 'true' || result.success === true) {
+      if (result.success === true) {
         setFormStatus('success');
         setFormData(initialFormData);
       } else {

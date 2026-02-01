@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { SendIcon, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactFormData, FormStatus, EmailValidationState } from "@/data/data_types";
-import { FORM_CONFIG } from "@/config/constants";
 import FormInput from "./FormInput";
 import FormTextarea from "./FormTextarea";
 import FormStatusMessage from "./FormStatusMessage";
@@ -31,8 +30,6 @@ const ContactForm = ({
   onEmailChange,
   onSubmit,
 }: ContactFormProps) => {
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-
   return (
     <motion.div variants={itemVariants}>
       <div className="flex items-center justify-between mb-4 sm:mb-6">
@@ -44,18 +41,9 @@ const ContactForm = ({
 
       <form
         id="contact-form"
-        method="POST"
         onSubmit={onSubmit}
         className="space-y-4 sm:space-y-6"
-        action={`${process.env.NEXT_PUBLIC_FORM_SUBMIT_URL}/${process.env.NEXT_PUBLIC_FORM_SUBMIT_ID}`}
       >
-        {/* Hidden FormSubmit fields */}
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value={currentUrl} />
-        <input type="hidden" name="_subject" value="New contact from portfolio" />
-        <input type="hidden" name="_cc" value={process.env.NEXT_PUBLIC_SECONDARY_EMAIL} />
-        <input type="hidden" name="_autoresponse" value={FORM_CONFIG.AUTO_RESPONSE} />
-
         {/* Form Fields */}
         <motion.div variants={itemVariants}>
           <FormInput
