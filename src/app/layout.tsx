@@ -28,10 +28,10 @@ export default function RootLayout({
           src={`https://www.noupe.com/embed/${process.env.NOUPE_EMBED_KEY}.js`}
           strategy="afterInteractive"
         />
-        <Script
+        {/* <Script
           src={`https://cdn.jotfor.ms/agent/embedjs/${process.env.JOTFORM_AGENT_ID}/embed.js?skipWelcome=1&maximizable=1`}
           strategy="afterInteractive"
-        />
+        /> */}
       </body>
     </html>
   );
